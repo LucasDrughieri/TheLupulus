@@ -1,0 +1,12 @@
+Backend/.settings
+Backend/.classpath
+Backend/.project
+Backend/target
+target
+logs
+.settings
+.classpath
+.project
+.idea
+target
+target/
