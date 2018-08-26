@@ -1,0 +1,31 @@
+<div class="row border-bottom">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" (click)="toggleNavigationBar()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+
+        <div class="navbar-brand"></div>
+
+        <ul class="nav navbar-top-links navbar-right pull-right" style="margin-top:8px;">
+            <li class="dropdown">
+                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user-circle-o text-xl text-success"></i>
+                    <span class="">{{userName}}</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a>
+                            <div>
+                                <a (click)="logout()">
+                                    <i class="fa fa-sign-out fa-fw"></i> Salir </a>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>

@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "angular6-new-project"
+    "name": "the-lupulus"
   },
   "apps": [
     {
@@ -19,9 +19,31 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/font-awesome/css/font-awesome.css",
+        "../node_modules/animate.css/animate.min.css",
+        "../node_modules/datatables.net-bs/css/dataTables.bootstrap.css",
+        "../node_modules/datatables.net-buttons-bs/css/buttons.bootstrap.css",
+        "styles.scss",
+        "../node_modules/ngx-toastr/toastr.css",
+        "../node_modules/sweetalert2/dist/sweetalert2.min.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.js",
+        "../node_modules/metismenu/dist/metisMenu.js",
+        "assets/js/vfs_fonts.js",
+        "../node_modules/datatables.net/js/jquery.dataTables.js",
+        "../node_modules/datatables.net-bs/js/dataTables.bootstrap.js",
+        "../node_modules/datatables.net-buttons/js/dataTables.buttons.js",
+        "../node_modules/datatables.net-buttons/js/buttons.print.js",
+        "../node_modules/datatables.net-buttons/js/buttons.colVis.js",
+        "../node_modules/datatables.net-buttons-bs/js/buttons.bootstrap.js",
+        "../node_modules/datatables.net-buttons/js/buttons.html5.js",
+        "../node_modules/sweetalert2/dist/sweetalert2.min.js",
+        "../node_modules/moment/min/moment.min.js",
+        "assets/js/startup.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
