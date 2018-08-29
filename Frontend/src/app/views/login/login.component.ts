@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     login() {
+        this.onLoginSuccess();
         //this.messageService.showLoading();
 
         // this.loginSubscription = this.authService.post(this.model)
@@ -53,7 +54,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         //         });
     }
 
-    onLoginSuccess(data) {
+    onLoginSuccess() {
         this.router.navigate(['/Home']);
     }
 
