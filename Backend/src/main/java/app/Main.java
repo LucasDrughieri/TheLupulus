@@ -39,7 +39,6 @@ public class Main {
 
             for(int i = 101; i <= 105; i++) {
                 aClient = new Client();
-                aClient.setClientId(Long.valueOf(i));
                 aClient.setBusinessName("Zomvick");
                 aClient.setCuit(Long.valueOf("27352170750"));
                 aClient.setAddress("Lorca 260");
