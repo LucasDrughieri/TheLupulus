@@ -3,6 +3,7 @@ import { LoginComponent } from "./views/login/login.component";
 import { BlankLayoutComponent } from "./components/common/layouts/blankLayout.component";
 import { HomeComponent } from "./views/home/home.component";
 import { BasicLayoutComponent } from "./components/common/layouts/basicLayout.component";
+import { ContainerAddComponent } from "./views/container/add/container-add.component";
 
 export const ROUTES: Routes = [
     // Main redirect
@@ -18,7 +19,8 @@ export const ROUTES: Routes = [
     {
         path: '', component: BasicLayoutComponent,
         children: [
-            { path: 'Home', component: HomeComponent }
+            { path: 'Home', component: HomeComponent },
+            { path: 'Container/Add', component: ContainerAddComponent }
         ]
     },
     
