@@ -1,7 +1,6 @@
 package app.model;
 
 import lombok.Data;
-
 import javax.persistence.*;
 
 @Entity
@@ -16,7 +15,6 @@ public @Data class Client {
     @Column(name = "business_name")
     private String businessName;
 
-    @Column(name = "cuit")
     private Long cuit;
 
     @Column(name = "phone_number")

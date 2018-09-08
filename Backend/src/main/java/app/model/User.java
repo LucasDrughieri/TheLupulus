@@ -1,12 +1,25 @@
 package app.model;
 
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.Table;
+import lombok.Data;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class User {
+public @Data class User {
 
-    @ForeignKey(name="FK_COUNTRY")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    private Long userId;
+
+    @OneToOne
+    @JoinColumn(name="client_id")
+    private Client clientId;
+
+    private String nickname;
+
+    private String password;
+
+    private String role;
+
 }
