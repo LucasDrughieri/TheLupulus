@@ -1,7 +1,6 @@
 package app.model;
 
 import lombok.Data;
-import lombok.Setter;
 
 import javax.persistence.*;
 
