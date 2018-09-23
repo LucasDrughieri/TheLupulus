@@ -1,0 +1,49 @@
+<div class="wrapper-content animated fadeInRight">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h2 class="pull-left">
+                <strong>Listado de contenedores</strong>
+            </h2>
+            <div class="ibox-tools">
+                <a [routerLink]="['/Contenedores/Alta']" class="btn btn-sm btn-primary">
+                    Nuevo
+                    <i class="fa fa-plus"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <table class="table table-striped full-width" id="container-table">
+                <thead>
+                    <tr>
+                        <th class='text-center'>Nombrer</th>
+                        <th class='text-center'>Material</th>
+                        <th class='text-center'>Capacidad</th>
+                        <th class='text-center'>Cantidad</th>
+                        <th class='text-center'>Activo</th>
+                        <th class='text-center'>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let container of containers" class="pointer">
+                        <td class='text-center'>{{ container.name }}</td>
+                        <td class='text-center'>{{ container.material }}</td>
+                        <td class='text-center'>{{ container.capacity }}</td>
+                        <td class='text-center'>{{ container.quantity }}</td>
+                        <td class='text-center'>
+                            <label *ngIf="container.visible" class="label label-info">Si</label>
+                            <label *ngIf="!container.visible" class="label label-danger">No</label>
+                        </td>
+                        <td class='text-center'>
+                            <button class="btn btn-xs btn-primary" (click)="goToDetail(container.id)" title="Editar">
+                                <i class="fa fa-pencil fa-lg"></i>
+                            </button>
+                            <button class="btn btn-xs btn-danger" *ngIf="container.visible" (click)="delete(container.id)" title="Desactivar">
+                                <i class="fa fa-trash fa-lg"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

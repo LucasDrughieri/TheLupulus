@@ -250,7 +250,7 @@ ul.indented {
 
 .error-desc {
     font-size: 14px;
-}
+} 
 
 .btn-right {
     float: right;
@@ -326,4 +326,8 @@ pre {
 .alert-border-warning {
     border-color: #f8ac59;
     border-width: "3px 0 0"!important;
+}
+
+.text-underline {
+    text-decoration-line: underline;
 }

@@ -1,19 +1,18 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { ContainerService } from '../../../core/services/container.service';
 import { MessageService } from '../../../core/services/message.service';
 import { Subscription } from 'rxjs';
+import { BeerService } from '../../../core/services/beer.service';
 
 @Component({    
-    templateUrl: './container-add.component.html'    
+    templateUrl: './beer-add.component.html'    
 })
-export class ContainerAddComponent implements OnInit, OnDestroy {
-
+export class BeerAddComponent implements OnInit, OnDestroy {
 
     @ViewChild("form") form;
 
     postSubscription: Subscription;
 
-    constructor(private containerService: ContainerService, 
+    constructor(private beerService: BeerService, 
                 private messageService: MessageService) { }
 
     ngOnInit(): void { }
@@ -25,7 +24,7 @@ export class ContainerAddComponent implements OnInit, OnDestroy {
     save(){
         this.messageService.showLoading();
 
-        this.postSubscription = this.containerService.post(this.form.model).subscribe(response => {
+        this.postSubscription = this.beerService.post(this.form.model).subscribe(response => {
             this.messageService.closeLoading();
             //success
         },
