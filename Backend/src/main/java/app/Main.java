@@ -1,19 +1,17 @@
 package app;
 
 import app.model.Client;
-import app.model.Order;
-import app.model.User;
+import app.model.order.Order;
+import app.model.user.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.joda.time.DateTime;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 @SpringBootApplication
 public class Main {

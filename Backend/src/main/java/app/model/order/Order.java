@@ -1,7 +1,7 @@
-package app.model;
+package app.model.order;
 
+import app.model.user.User;
 import lombok.Data;
-import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -23,7 +23,7 @@ class Order {
 
     private Date date;
 
-    private String status;
+    private OrderState status;
 
     private BigDecimal amount;
 

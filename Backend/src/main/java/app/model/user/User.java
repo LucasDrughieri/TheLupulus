@@ -1,5 +1,6 @@
-package app.model;
+package app.model.user;
 
+import app.model.Client;
 import lombok.Data;
 import javax.persistence.*;
 
@@ -20,6 +21,6 @@ public @Data class User {
 
     private String password;
 
-    private String role;
+    private UserRole role;
 
 }
