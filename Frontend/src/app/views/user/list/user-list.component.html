@@ -1,0 +1,45 @@
+<div class="wrapper-content animated fadeInRight">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h3 class="pull-left">
+                <strong>Listado de usuarios</strong>
+            </h3>
+            <div class="ibox-tools">
+                <a [routerLink]="['/Usuarios/Alta']" class="btn btn-sm btn-primary">
+                    Nuevo
+                    <i class="fa fa-plus"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <table class="table table-striped full-width" id="user-table">
+                <thead>
+                    <tr>
+                        <th class='text-center'>Nombre</th>
+                        <th class='text-center'>Rol</th>
+                        <th class='text-center'>Activo</th>
+                        <th class='text-center'>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users" class="pointer">
+                        <td class='text-center'>{{ user.username }}</td>
+                        <td class='text-center'>{{ user.rol }}</td>
+                        <td class='text-center'>
+                            <label *ngIf="user.visible" class="label label-info">Si</label>
+                            <label *ngIf="!user.visible" class="label label-danger">No</label>
+                        </td>
+                        <td class='text-center'>
+                            <button class="btn btn-xs btn-primary" (click)="goToDetail(user.id)" title="Editar">
+                                <i class="fa fa-pencil fa-lg"></i>
+                            </button>
+                            <button class="btn btn-xs btn-danger" *ngIf="user.visible" (click)="delete(user.id)" title="Desactivar">
+                                <i class="fa fa-trash fa-lg"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -22,6 +22,14 @@ import { BeerAddComponent } from "./beer/add/beer-add.component";
 import { BeerFormComponent } from "./beer/form/beer-form.component";
 import { BeerEditComponent } from "./beer/edit/beer-edit.component";
 import { BeerListComponent } from "./beer/list/beer-list.component";
+import { UserAddComponent } from "./user/add/user-add.component";
+import { UserEditComponent } from "./user/edit/user-edit.component";
+import { UserFormComponent } from "./user/form/user-form.component";
+import { UserListComponent } from "./user/list/user-list.component";
+import { ClientAddComponent } from "./client/add/client-add.component";
+import { ClientFormComponent } from "./client/form/client-form.component";
+import { ClientListComponent } from "./client/list/client-list.component";
+import { ClientEditComponent } from "./client/edit/client-edit.component";
 
 @NgModule({
     declarations: [
@@ -34,7 +42,15 @@ import { BeerListComponent } from "./beer/list/beer-list.component";
         BeerAddComponent,
         BeerFormComponent,
         BeerEditComponent,
-        BeerListComponent
+        BeerListComponent,
+        UserAddComponent,
+        UserEditComponent,
+        UserFormComponent,
+        UserListComponent,
+        ClientAddComponent,
+        ClientFormComponent,
+        ClientListComponent,
+        ClientEditComponent
     ],
     providers: [
         BaseService,

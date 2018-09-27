@@ -9,6 +9,12 @@ import { ContainerListComponent } from "./views/container/list/container-list.co
 import { BeerListComponent } from "./views/beer/list/beer-list.component";
 import { BeerAddComponent } from "./views/beer/add/beer-add.component";
 import { BeerEditComponent } from "./views/beer/edit/beer-edit.component";
+import { UserListComponent } from "./views/user/list/user-list.component";
+import { UserAddComponent } from "./views/user/add/user-add.component";
+import { UserEditComponent } from "./views/user/edit/user-edit.component";
+import { ClientListComponent } from "./views/client/list/client-list.component";
+import { ClientAddComponent } from "./views/client/add/client-add.component";
+import { ClientEditComponent } from "./views/client/edit/client-edit.component";
 
 export const ROUTES: Routes = [
     // Main redirect
@@ -43,6 +49,24 @@ export const ROUTES: Routes = [
             { path: '', component: BeerListComponent },
             { path: 'Alta', component: BeerAddComponent },
             { path: ':id/Editar', component: BeerEditComponent }
+        ]
+    },
+
+    {
+        path: 'Usuarios', component: BasicLayoutComponent,
+        children: [
+            { path: '', component: UserListComponent },
+            { path: 'Alta', component: UserAddComponent },
+            { path: ':id/Editar', component: UserEditComponent }
+        ]
+    },
+
+    {
+        path: 'Clientes', component: BasicLayoutComponent,
+        children: [
+            { path: '', component: ClientListComponent },
+            { path: 'Alta', component: ClientAddComponent },
+            { path: ':id/Editar', component: ClientEditComponent }
         ]
     },
     
