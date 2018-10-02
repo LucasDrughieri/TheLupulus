@@ -22,7 +22,7 @@ public class Order {
 
     private Date date;
 
-    private OrderState status;
+    private Integer status;
 
     private BigDecimal amount;
 
@@ -52,11 +52,11 @@ public class Order {
         this.date = date;
     }
 
-    public OrderState getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(OrderState status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

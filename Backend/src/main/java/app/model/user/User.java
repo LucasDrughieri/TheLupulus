@@ -21,7 +21,7 @@ public @Data class User {
 
     private String password;
 
-    private UserRole role;
+    private Integer role;
 
     public Long getUserId() {
         return userId;
@@ -55,11 +55,11 @@ public @Data class User {
         this.password = password;
     }
 
-    public UserRole getRole() {
+    public Integer getRole() {
         return role;
     }
 
-    public void setRole(UserRole role) {
+    public void setRole(Integer role) {
         this.role = role;
     }
 }

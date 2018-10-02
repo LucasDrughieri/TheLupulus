@@ -2,5 +2,15 @@ package app.model.user;
 
 public enum UserRole {
 
-    ADMINISTRATOR, NORMAL_USER
+    ADMINISTRATOR(0), NORMAL_USER(1);
+
+    private Integer code;
+
+    UserRole(Integer code) {
+        this.code = code;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
 }

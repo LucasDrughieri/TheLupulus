@@ -62,12 +62,12 @@ public class Main {
                 anUser.setClientId(aClient);
                 anUser.setNickname("PEPITO");
                 anUser.setPassword("123456");
-                anUser.setRole(UserRole.NORMAL_USER);
+                anUser.setRole(UserRole.NORMAL_USER.getCode());
 
                 anOrder = new Order();
                 anOrder.setUserId(anUser);
                 anOrder.setVisible(true);
-                anOrder.setStatus(OrderState.FINALIZED);
+                anOrder.setStatus(OrderState.FINALIZED.getCode());
                 anOrder.setAmount(new BigDecimal(100.99));
                 anOrder.setDate(new DateTime().toDate());
 
@@ -83,10 +83,26 @@ public class Main {
                 aBeer.setQuantity(100);
                 aBeer.setVisible(true);
 
+                aContainer = new Container();
+                aContainer.setCapacity(150);
+                aContainer.setContainerId(Long.valueOf("123"));
+                aContainer.setHeight(1.2f);
+                aContainer.setMaterial("Madera");
+                aContainer.setQuantity(10);
+                aContainer.setVisible(true);
+
+                anItem = new Item();
+                anItem.setBeerId(aBeer);
+                anItem.setContainerId(aContainer);
+                anItem.setOrderId(anOrder);
+                anItem.setItemId(Long.valueOf("123456"));
+
                 sessionObj.save(aClient);
                 sessionObj.save(anUser);
                 sessionObj.save(anOrder);
                 sessionObj.save(aBeer);
+                sessionObj.save(aContainer);
+                sessionObj.save(anItem);
             }
             System.out.println("\n.......Records Saved Successfully To The Database.......\n");
 
