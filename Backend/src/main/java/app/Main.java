@@ -1,8 +1,13 @@
 package app;
 
+import app.model.Beer;
 import app.model.Client;
+import app.model.Container;
+import app.model.order.Item;
 import app.model.order.Order;
+import app.model.order.OrderState;
 import app.model.user.User;
+import app.model.user.UserRole;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -19,6 +24,9 @@ public class Main {
     static Client aClient;
     static User anUser;
     static Order anOrder;
+    static Beer aBeer;
+    static Container aContainer;
+    static Item anItem;
     static Session sessionObj;
     static SessionFactory sessionFactoryObj;
 
@@ -54,18 +62,31 @@ public class Main {
                 anUser.setClientId(aClient);
                 anUser.setNickname("PEPITO");
                 anUser.setPassword("123456");
-                anUser.setRole("ADMIN");
+                anUser.setRole(UserRole.NORMAL_USER);
 
                 anOrder = new Order();
                 anOrder.setUserId(anUser);
                 anOrder.setVisible(true);
-                anOrder.setStatus("FULFILLED");
+                anOrder.setStatus(OrderState.FINALIZED);
                 anOrder.setAmount(new BigDecimal(100.99));
                 anOrder.setDate(new DateTime().toDate());
+
+                aBeer = new Beer();
+                aBeer.setBeerId(Long.valueOf("123123123"));
+                aBeer.setColor("Rubia");
+                aBeer.setDensity(0.14f);
+                aBeer.setGraduation(0.15f);
+                aBeer.setGranos("Some granos");
+                aBeer.setIbu(0.6f);
+                aBeer.setName("My Beer");
+                aBeer.setPricePerLitre(13f);
+                aBeer.setQuantity(100);
+                aBeer.setVisible(true);
 
                 sessionObj.save(aClient);
                 sessionObj.save(anUser);
                 sessionObj.save(anOrder);
+                sessionObj.save(aBeer);
             }
             System.out.println("\n.......Records Saved Successfully To The Database.......\n");
 
