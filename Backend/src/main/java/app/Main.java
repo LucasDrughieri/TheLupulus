@@ -1,19 +1,22 @@
 package app;
 
+import app.model.Beer;
 import app.model.Client;
-import app.model.Order;
-import app.model.User;
+import app.model.Container;
+import app.model.order.Item;
+import app.model.order.Order;
+import app.model.order.OrderState;
+import app.model.user.User;
+import app.model.user.UserRole;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.joda.time.DateTime;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 @SpringBootApplication
 public class Main {
@@ -21,6 +24,9 @@ public class Main {
     static Client aClient;
     static User anUser;
     static Order anOrder;
+    static Beer aBeer;
+    static Container aContainer;
+    static Item anItem;
     static Session sessionObj;
     static SessionFactory sessionFactoryObj;
 
@@ -56,18 +62,47 @@ public class Main {
                 anUser.setClientId(aClient);
                 anUser.setNickname("PEPITO");
                 anUser.setPassword("123456");
-                anUser.setRole("ADMIN");
+                anUser.setRole(UserRole.NORMAL_USER.getCode());
 
                 anOrder = new Order();
                 anOrder.setUserId(anUser);
                 anOrder.setVisible(true);
-                anOrder.setStatus("FULFILLED");
+                anOrder.setStatus(OrderState.FINALIZED.getCode());
                 anOrder.setAmount(new BigDecimal(100.99));
                 anOrder.setDate(new DateTime().toDate());
+
+                aBeer = new Beer();
+                aBeer.setBeerId(Long.valueOf("123123123"));
+                aBeer.setColor("Rubia");
+                aBeer.setDensity(0.14f);
+                aBeer.setGraduation(0.15f);
+                aBeer.setGranos("Some granos");
+                aBeer.setIbu(0.6f);
+                aBeer.setName("My Beer");
+                aBeer.setPricePerLitre(13f);
+                aBeer.setQuantity(100);
+                aBeer.setVisible(true);
+
+                aContainer = new Container();
+                aContainer.setCapacity(150);
+                aContainer.setContainerId(Long.valueOf("123"));
+                aContainer.setHeight(1.2f);
+                aContainer.setMaterial("Madera");
+                aContainer.setQuantity(10);
+                aContainer.setVisible(true);
+
+                anItem = new Item();
+                anItem.setBeerId(aBeer);
+                anItem.setContainerId(aContainer);
+                anItem.setOrderId(anOrder);
+                anItem.setItemId(Long.valueOf("123456"));
 
                 sessionObj.save(aClient);
                 sessionObj.save(anUser);
                 sessionObj.save(anOrder);
+                sessionObj.save(aBeer);
+                sessionObj.save(aContainer);
+                sessionObj.save(anItem);
             }
             System.out.println("\n.......Records Saved Successfully To The Database.......\n");
 

@@ -20,7 +20,11 @@
 
         <!-- Mapping With Model Class Containing Annotations -->
         <mapping class="app.model.Client" />
-        <mapping class="app.model.User" />
-        <mapping class="app.model.Order" />
+        <mapping class="app.model.user.User" />
+        <mapping class="app.model.order.Item" />
+        <mapping class="app.model.order.Order" />
+        <mapping class="app.model.Beer" />
+        <mapping class="app.model.Container" />
+
     </session-factory>
 </hibernate-configuration>
