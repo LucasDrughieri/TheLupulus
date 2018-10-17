@@ -10,6 +10,7 @@ logs
 .idea
 target
 target/
+*.iml
 
 # compiled output
 dist
