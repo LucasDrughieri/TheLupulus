@@ -1,7 +1,7 @@
-package app.model.order;
+package app.entities.order;
 
-import app.model.Beer;
-import app.model.Container;
+import app.entities.Beer;
+import app.entities.Container;
 
 import javax.persistence.*;
 

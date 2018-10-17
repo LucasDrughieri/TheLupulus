@@ -1,7 +1,6 @@
-package app.model.order;
+package app.entities.order;
 
-import app.model.user.User;
-import lombok.Data;
+import app.entities.user.User;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
