@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class DummyController {
+public class HealthCheckController {
 
-    @RequestMapping("/dummy")
-    public String hello(){
+    @RequestMapping("/health-check")
+    public String healthCheck(){
         return "Up and running!";
     }
 }
