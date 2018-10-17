@@ -1,6 +1,6 @@
-package app.model.user;
+package app.entities.user;
 
-import app.model.Client;
+import app.entities.Client;
 import lombok.Data;
 import javax.persistence.*;
 

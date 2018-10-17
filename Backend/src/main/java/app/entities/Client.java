@@ -1,4 +1,4 @@
-package app.model;
+package app.entities;
 
 import lombok.Data;
 import javax.persistence.*;
