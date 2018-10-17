@@ -1,12 +1,11 @@
-package app.entities.user;
+package app.entity.user;
 
-import app.entities.Client;
-import lombok.Data;
+import app.entity.Client;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-public @Data class User {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

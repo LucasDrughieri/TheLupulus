@@ -1,14 +1,7 @@
-package app.entities;
+package app.model;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "containers")
 public class Container {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "container_id")
     private Long containerId;
 
     private String name;

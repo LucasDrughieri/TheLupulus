@@ -1,4 +1,4 @@
-package app.entities.order;
+package app.entity.order;
 
 public enum OrderState {
 

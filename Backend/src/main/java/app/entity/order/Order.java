@@ -1,6 +1,6 @@
-package app.entities.order;
+package app.entity.order;
 
-import app.entities.user.User;
+import app.entity.user.User;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

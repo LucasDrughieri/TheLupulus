@@ -1,4 +1,4 @@
-package app.entities.user;
+package app.entity.user;
 
 public enum UserRole {
 
