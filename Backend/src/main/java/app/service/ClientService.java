@@ -21,7 +21,7 @@ public class ClientService {
 
         Response response = new Response();
 
-        if (clientRepository.exists(model.getCuit())){
+        if (model.getId() != null && clientRepository.exists(model.getId())){
             response.addError("El cliente ya existe");
             return response;
         }
@@ -34,7 +34,7 @@ public class ClientService {
         client.setPhoneNumber(model.getPhoneNumber());
 
         try{
-            clientRepository.save(client);
+            response.data = clientRepository.save(client);
             response.addSuccess("Cliente creado satisfactoriamente");
         } catch (Exception e){
             response.addError("Ocurrió un error al crear el cliente");
@@ -124,19 +124,31 @@ public class ClientService {
     public Response updateClient(ClientModel model){
         Response response = new Response();
         try {
-            if (clientRepository.exists(model.getCuit())) {
-                Client client = new Client();
-                client.setAddress(model.getAddress());
-                client.setBusinessName(model.getBusinessName());
-                client.setCuit(model.getCuit());
-                client.setEmail(model.getEmail());
-                client.setPhoneNumber(model.getPhoneNumber());
-                clientRepository.update(client);
-                response.addSuccess("Cliente actualizado satisfactoriamente");
+
+            Client oldClient = clientRepository.getById(model.getId());
+
+            if (oldClient != null) {
+                if (!oldClient.getCuit().equals(model.getCuit()) && clientRepository.getByCuit(model.getCuit()) != null){
+                    response.addError("Ya existe el cuit");
+                    return response;
+                }else{
+
+                    Client newClient = new Client();
+                    newClient.setClientId(oldClient.getClientId());
+                    newClient.setAddress(model.getAddress());
+                    newClient.setBusinessName(model.getBusinessName());
+                    newClient.setCuit(model.getCuit());
+                    newClient.setEmail(model.getEmail());
+                    newClient.setPhoneNumber(model.getPhoneNumber());
+                    clientRepository.update(newClient);
+                    response.addSuccess("Cliente actualizado satisfactoriamente");
+                    return response;
+                }
+            }else{
+                response.addError("El cliente no existe");
                 return response;
             }
-            response.addError("El cliente no existe");
-            return response;
+
         }catch (Exception e ){
             response.addError("Ocurrió un problema al actualizar el cliente");
             return response;

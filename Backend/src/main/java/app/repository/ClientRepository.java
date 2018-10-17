@@ -20,8 +20,9 @@ public class ClientRepository {
         return _sessionFactory.getCurrentSession();
     }
 
-    public void save(Client client) {
+    public Client save(Client client) {
         getSession().save(client);
+        return client;
     }
 
     public void delete(Client client) {
@@ -45,8 +46,8 @@ public class ClientRepository {
         getSession().update(client);
     }
 
-    public boolean exists(long cuit){
-        Client client = (Client) getSession().get(Client.class,cuit);
+    public boolean exists(long id){
+        Client client = (Client) getSession().get(Client.class,id);
         return client != null;
     }
 }

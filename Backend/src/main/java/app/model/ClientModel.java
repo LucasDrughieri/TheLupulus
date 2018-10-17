@@ -2,6 +2,8 @@ package app.model;
 
 public class ClientModel {
 
+    private Long id;
+
     private String businessName;
 
     private Long cuit;
@@ -51,4 +53,13 @@ public class ClientModel {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
+
