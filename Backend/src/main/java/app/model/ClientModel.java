@@ -1,8 +1,6 @@
 package app.model;
 
-public class Client {
-
-    private Long clientId;
+public class ClientModel {
 
     private String businessName;
 
@@ -13,14 +11,6 @@ public class Client {
     private String email;
 
     private String address;
-
-    public Long getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
-    }
 
     public String getBusinessName() {
         return businessName;
