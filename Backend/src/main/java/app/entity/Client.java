@@ -2,8 +2,7 @@ package app.entity;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "clients")
+@Entity(name ="clients")
 public class Client {
 
     @Id

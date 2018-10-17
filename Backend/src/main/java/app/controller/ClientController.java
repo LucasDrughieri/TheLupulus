@@ -10,14 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/api/client")
+@RequestMapping("/api")
 @CrossOrigin(origins = "*")
 public class ClientController {
 
     @Autowired
     private ClientService clientService;
 
-    @GetMapping(value = "/create")
+    @PostMapping(value = "/client/create")
     @ResponseBody
     public ResponseEntity<Response> createClient(@RequestBody ClientModel newClient){
         Response response = clientService.createClient(newClient);
@@ -27,7 +27,7 @@ public class ClientController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/delete")
+    @PostMapping(value = "/client/delete")
     @ResponseBody
     public ResponseEntity<Response> deleteClient(@RequestBody ClientModel newClient){
         Response response = clientService.deleteClient(newClient);
@@ -37,7 +37,7 @@ public class ClientController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/update")
+    @PutMapping(value = "/client/update")
     @ResponseBody
     public ResponseEntity<Response> updateClient(@RequestBody ClientModel newClient){
         Response response = clientService.updateClient(newClient);
@@ -47,9 +47,9 @@ public class ClientController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/clients")
+    @GetMapping(value = "/client/clients")
     @ResponseBody
-    public ResponseEntity<Response> getClients(@RequestBody ClientModel newClient){
+    public ResponseEntity<Response> getClients(){
         Response response = clientService.getAllClients();
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -59,7 +59,7 @@ public class ClientController {
 
     @GetMapping(value = "/client")
     @ResponseBody
-    public ResponseEntity<Response> getById(@RequestParam long idClient){
+    public ResponseEntity<Response> getById(@RequestParam("clientId") long idClient){
         Response response = clientService.getById(idClient);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -67,9 +67,9 @@ public class ClientController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/client")
+    @GetMapping(value = "/client-by-cuit")
     @ResponseBody
-    public ResponseEntity<Response> getByCuit(@RequestParam long cuit){
+    public ResponseEntity<Response> getByCuit(@RequestParam("cuit") long cuit){
         Response response = clientService.getByCuit(cuit);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);

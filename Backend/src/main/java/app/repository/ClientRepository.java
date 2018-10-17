@@ -34,14 +34,11 @@ public class ClientRepository {
     }
 
     public Client getByCuit(long cuit) {
-        return (Client) getSession().createQuery(
-                "from clients where email = :email")
-                .setParameter("cuit", cuit)
-                .uniqueResult();
+        return (Client) getSession().get(Client.class,cuit);
     }
 
     public Client getById(long id) {
-        return (Client) getSession().load(Client.class, id);
+        return (Client) getSession().get(Client.class, id);
     }
 
     public void update(Client client) {
@@ -49,7 +46,7 @@ public class ClientRepository {
     }
 
     public boolean exists(long cuit){
-        Client client = this.getByCuit(cuit);
+        Client client = (Client) getSession().get(Client.class,cuit);
         return client != null;
     }
 }
