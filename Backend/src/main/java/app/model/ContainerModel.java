@@ -2,7 +2,7 @@ package app.model;
 
 public class Container {
 
-    private Long containerId;
+    private Long id;
 
     private String name;
 
@@ -19,11 +19,11 @@ public class Container {
     private Boolean visible;
 
     public Long getContainerId() {
-        return containerId;
+        return id;
     }
 
     public void setContainerId(Long containerId) {
-        this.containerId = containerId;
+        this.id = containerId;
     }
 
     public String getName() {
