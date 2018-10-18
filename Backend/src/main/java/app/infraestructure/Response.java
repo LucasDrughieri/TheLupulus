@@ -13,7 +13,7 @@ public class Response<T> {
     }
 
     public void addSuccess(String message){
-        this.messages.add(new Message(message, MessageType.Succes));
+        this.messages.add(new Message(message, MessageType.Success));
     }
 
     public void addError(String message){

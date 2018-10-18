@@ -31,7 +31,7 @@ public class BeerController {
 
             _service.Create(beer);
 
-            response.messages.add(new Message("Beer succesfully created.", MessageType.Succes));
+            response.messages.add(new Message("Beer succesfully created.", MessageType.Success));
         }
         catch (Exception ex) {
             response.messages.add(new Message("Error: " + ex.getMessage(), MessageType.Error));
