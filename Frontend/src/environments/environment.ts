@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  urlApi: ''
+  urlApi: 'https://the-lupulus.herokuapp.com/api/'
 };

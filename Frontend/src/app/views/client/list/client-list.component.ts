@@ -10,7 +10,7 @@ import { Client } from '../../../models/client';
     templateUrl: './client-list.component.html'
 })
 export class ClientListComponent implements OnInit {
-    public users: Client[] = new Array();
+    public clients: Client[] = new Array();
 
     private getAllSubscription: Subscription;
     private deleteSubscription: Subscription;
@@ -22,7 +22,7 @@ export class ClientListComponent implements OnInit {
         private dataTableService: DataTableService) { }
 
     ngOnInit(): void {
-        // this.getAllClients();
+        this.getAllClients();
         this.initializeDataTable();
     }
 
@@ -51,7 +51,10 @@ export class ClientListComponent implements OnInit {
         this.getAllSubscription = this.clientService.getAll()
             .subscribe(
                 response => {
-                    this.users = response.data;
+                    this.clients = response.data.map(item => {
+                        item.visible = true;
+                        return item;
+                    });
 
                     this.initializeDataTable();
                     this.messageService.closeLoading();
