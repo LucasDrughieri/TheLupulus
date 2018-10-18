@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class ClientRepository {
+public class ContainerRepository {
 
     @Autowired
     private SessionFactory _sessionFactory;

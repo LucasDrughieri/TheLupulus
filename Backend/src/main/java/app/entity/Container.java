@@ -25,11 +25,11 @@ public class Container {
 
     private Boolean visible;
 
-    public Long getContainerId() {
+    public Long getId() {
         return containerId;
     }
 
-    public void setContainerId(Long containerId) {
+    public void setId(Long containerId) {
         this.containerId = containerId;
     }
 
