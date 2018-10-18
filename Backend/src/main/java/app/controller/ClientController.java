@@ -29,8 +29,8 @@ public class ClientController {
 
     @DeleteMapping(value = "/client/{clientId}")
     @ResponseBody
-    public ResponseEntity<Response> deleteClient(@PathVariable long id){
-        Response response = clientService.deleteClient(id);
+    public ResponseEntity<Response> deleteClient(@PathVariable("clientId") long clientId){
+        Response response = clientService.deleteClient(clientId);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
