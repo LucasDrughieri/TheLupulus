@@ -127,7 +127,7 @@ public class ClientService {
                 }else{
 
                     Client newClient = new Client();
-                    newClient.setClientId(oldClient.getClientId());
+                    newClient.setId(oldClient.getId());
                     newClient.setAddress(model.getAddress());
                     newClient.setBusinessName(model.getBusinessName());
                     newClient.setCuit(model.getCuit());

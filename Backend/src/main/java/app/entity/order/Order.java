@@ -13,7 +13,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
-    private Long orderId;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -27,12 +27,12 @@ public class Order {
 
     private Boolean visible;
 
-    public Long getOrderId() {
-        return orderId;
+    public Long getId() {
+        return id;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public User getUserId() {
