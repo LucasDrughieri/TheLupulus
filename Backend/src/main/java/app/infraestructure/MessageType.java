@@ -1,6 +1,6 @@
 package app.infraestructure;
 
 public enum MessageType {
-    Succes,
+    Success,
     Error
 }

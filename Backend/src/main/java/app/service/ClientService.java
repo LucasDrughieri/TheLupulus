@@ -101,17 +101,10 @@ public class ClientService {
         }
     }
 
-    public Response deleteClient(ClientModel model){
+    public Response deleteClient(long id){
         Response response = new Response();
         try{
-            Client client = new Client();
-            client.setAddress(model.getAddress());
-            client.setBusinessName(model.getBusinessName());
-            client.setCuit(model.getCuit());
-            client.setEmail(model.getEmail());
-            client.setPhoneNumber(model.getPhoneNumber());
-
-            clientRepository.delete(client);
+            clientRepository.delete(id);
             response.addSuccess("Se removió el cliente");
             return response;
         }catch (Exception e){

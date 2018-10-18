@@ -17,7 +17,7 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
-    @PostMapping(value = "/client/create")
+    @PostMapping(value = "/client")
     @ResponseBody
     public ResponseEntity<Response> createClient(@RequestBody ClientModel newClient){
         Response response = clientService.createClient(newClient);
@@ -27,17 +27,17 @@ public class ClientController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/client/delete")
+    @DeleteMapping(value = "/client/{clientId}")
     @ResponseBody
-    public ResponseEntity<Response> deleteClient(@RequestBody ClientModel newClient){
-        Response response = clientService.deleteClient(newClient);
+    public ResponseEntity<Response> deleteClient(@PathVariable long id){
+        Response response = clientService.deleteClient(id);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/client/update")
+    @PutMapping(value = "/client")
     @ResponseBody
     public ResponseEntity<Response> updateClient(@RequestBody ClientModel newClient){
         Response response = clientService.updateClient(newClient);
@@ -47,7 +47,7 @@ public class ClientController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/client/clients")
+    @GetMapping(value = "/client")
     @ResponseBody
     public ResponseEntity<Response> getClients(){
         Response response = clientService.getAllClients();
@@ -57,9 +57,9 @@ public class ClientController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/client")
+    @GetMapping(value = "/client/{clientId}")
     @ResponseBody
-    public ResponseEntity<Response> getById(@RequestParam("clientId") long idClient){
+    public ResponseEntity<Response> getById(@PathVariable("clientId") long idClient){
         Response response = clientService.getById(idClient);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
