@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class Order {
 
-    private Long orderId;
+    private Long id;
 
     private User userId;
 
@@ -19,12 +19,12 @@ public class Order {
 
     private Boolean visible;
 
-    public Long getOrderId() {
-        return orderId;
+    public Long getId() {
+        return id;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public User getUserId() {

@@ -9,7 +9,7 @@ public class Client implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "client_id")
-    private Long clientId;
+    private Long id;
 
     @Column(name = "business_name")
     private String businessName;
@@ -25,12 +25,12 @@ public class Client implements Serializable {
     @Column(name = "address")
     private String address;
 
-    public Long getClientId() {
-        return clientId;
+    public Long getId() {
+        return id;
     }
 
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getBusinessName() {

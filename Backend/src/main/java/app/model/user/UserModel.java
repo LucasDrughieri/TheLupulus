@@ -1,12 +1,10 @@
 package app.model.user;
 
-import app.entity.Client;
+public class UserModel {
 
-public class User {
+    private Long id;
 
-    private Long userId;
-
-    private Client clientId;
+    private Long clientId;
 
     private String nickname;
 
@@ -14,19 +12,19 @@ public class User {
 
     private Integer role;
 
-    public Long getUserId() {
-        return userId;
+    public Long getId() {
+        return id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Client getClientId() {
+    public Long getClientId() {
         return clientId;
     }
 
-    public void setClientId(Client clientId) {
+    public void setClientId(Long clientId) {
         this.clientId = clientId;
     }
 

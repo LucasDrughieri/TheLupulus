@@ -2,7 +2,7 @@ package app.entity.user;
 
 public enum UserRole {
 
-    ADMINISTRATOR(0), NORMAL_USER(1);
+    ADMINISTRATOR(1), NORMAL_USER(2);
 
     private Integer code;
 
