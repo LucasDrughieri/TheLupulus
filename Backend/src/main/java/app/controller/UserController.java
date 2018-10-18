@@ -21,8 +21,8 @@ public class UserController {
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<Response> createClient(@RequestBody UserModel newClient){
-        Response response = userService.createUser(newClient);
+    public ResponseEntity<Response> createUser(@RequestBody UserModel newUser){
+        Response response = userService.createUser(newUser);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
@@ -31,8 +31,8 @@ public class UserController {
 
     @DeleteMapping(value = "/{userId}")
     @ResponseBody
-    public ResponseEntity<Response> deleteClient(@PathVariable("clientId") long clientId){
-        Response response = userService.deleteUser(clientId);
+    public ResponseEntity<Response> deleteUser(@PathVariable("userId") long userId){
+        Response response = userService.deleteUser(userId);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
@@ -41,7 +41,7 @@ public class UserController {
 
     @GetMapping
     @ResponseBody
-    public ResponseEntity<Response> getClients(){
+    public ResponseEntity<Response> getUsers(){
         Response response = userService.getAllUsers();
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -49,10 +49,10 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{clientId}")
+    @GetMapping(value = "/{userId}")
     @ResponseBody
-    public ResponseEntity<Response> getById(@PathVariable("clientId") long idClient){
-        Response response = userService.getById(idClient);
+    public ResponseEntity<Response> getById(@PathVariable("userId") long userId){
+        Response response = userService.getById(userId);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
