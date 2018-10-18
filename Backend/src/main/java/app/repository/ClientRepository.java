@@ -26,7 +26,7 @@ public class ClientRepository {
     }
 
     public void delete(long id) {
-        getSession().delete(id);
+        getSession().delete(getById(id));
     }
 
     @SuppressWarnings("unchecked")
