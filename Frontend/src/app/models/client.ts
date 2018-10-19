@@ -2,7 +2,7 @@ export class Client {
     id: number;
     businessName: string;
     cuit: string;
-    telephone: string;
+    phoneNumber: string;
     email: string;
     address: string;
 }

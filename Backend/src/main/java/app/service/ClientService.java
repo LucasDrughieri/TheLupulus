@@ -4,6 +4,7 @@ import app.entity.Client;
 import app.infraestructure.Response;
 import app.model.ClientModel;
 import app.repository.ClientRepository;
+import app.repository.ContainerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -127,7 +128,7 @@ public class ClientService {
                 }else{
 
                     Client newClient = new Client();
-                    newClient.setClientId(oldClient.getClientId());
+                    newClient.setId(oldClient.getId());
                     newClient.setAddress(model.getAddress());
                     newClient.setBusinessName(model.getBusinessName());
                     newClient.setCuit(model.getCuit());

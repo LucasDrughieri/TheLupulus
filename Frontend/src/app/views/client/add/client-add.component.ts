@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MessageService } from '../../../core/services/message.service';
 import { Subscription } from 'rxjs';
 import { ClientService } from '../../../core/services/client.service';
+import { Router } from '@angular/router';
 
 @Component({    
     templateUrl: './client-add.component.html'    
@@ -12,7 +13,8 @@ export class ClientAddComponent implements OnInit, OnDestroy {
 
     postSubscription: Subscription;
 
-    constructor(private clientService: ClientService, 
+    constructor(private clientService: ClientService,
+                private router: Router, 
                 private messageService: MessageService) { }
 
     ngOnInit(): void { }
@@ -26,7 +28,7 @@ export class ClientAddComponent implements OnInit, OnDestroy {
 
         this.postSubscription = this.clientService.post(this.form.model).subscribe(response => {
             this.messageService.closeLoading();
-            //success
+            this.router.navigate(["/Clientes"]);
         },
         error => this.messageService.closeLoading());
     }
