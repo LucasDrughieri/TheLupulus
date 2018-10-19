@@ -53,7 +53,6 @@ export class ClientEditComponent implements OnInit, OnDestroy {
     save(){
         this.messageService.showLoading();
 
-        this.form.model.id = this.form.model.clientId;
         this.putSubscription = this.clientService.put(this.form.model).subscribe(response => {
             this.messageService.closeLoading();
             this.router.navigate(["/Clientes"]);

@@ -15,7 +15,9 @@ export class UserAddComponent implements OnInit, OnDestroy {
     constructor(private userService: UserService, 
                 private messageService: MessageService) { }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+
+     }
 
     ngOnDestroy(): void {
         if(this.postSubscription) this.postSubscription.unsubscribe();
@@ -24,10 +26,9 @@ export class UserAddComponent implements OnInit, OnDestroy {
     save(){
         this.messageService.showLoading();
 
-        this.postSubscription = this.userService.post(this.form.model).subscribe(response => {
+        this.postSubscription = this.userService.post(this.form.model).subscribe(() => {
             this.messageService.closeLoading();
-            //success
         },
-        error => this.messageService.closeLoading());
+        () => this.messageService.closeLoading());
     }
 }

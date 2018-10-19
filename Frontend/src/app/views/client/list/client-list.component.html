@@ -36,10 +36,10 @@
                             <label *ngIf="!client.visible" class="label label-danger">No</label>
                         </td>
                         <td class='text-center'>
-                            <button class="btn btn-xs btn-primary" (click)="goToDetail(client.clientId)" title="Editar">
+                            <button class="btn btn-xs btn-primary" (click)="goToDetail(client.id)" title="Editar">
                                 <i class="fa fa-pencil fa-lg"></i>
                             </button>
-                            <button class="btn btn-xs btn-danger" *ngIf="client.visible" (click)="delete(client.clientId)" title="Desactivar">
+                            <button class="btn btn-xs btn-danger" *ngIf="client.visible" (click)="delete(client.id)" title="Desactivar">
                                 <i class="fa fa-trash fa-lg"></i>
                             </button>
                         </td>

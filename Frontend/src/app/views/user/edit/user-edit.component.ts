@@ -29,7 +29,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
         }
 
         const userId = routeParams.id;
-        // this.getModel(userId);
+        this.getModel(userId);
     }
 
     ngOnDestroy(): void {

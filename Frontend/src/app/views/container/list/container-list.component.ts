@@ -22,7 +22,7 @@ export class ContainerListComponent implements OnInit {
         private dataTableService: DataTableService) { }
 
     ngOnInit(): void {
-        // this.getAllContainers();
+        this.getAllContainers();
         this.initializeDataTable();
     }
 
@@ -51,7 +51,11 @@ export class ContainerListComponent implements OnInit {
         this.getAllSubscription = this.containerService.getAll()
             .subscribe(
                 response => {
-                    this.containers = response.data;
+                    this.containers = response.data.map(item => {
+                        item.visible = true;
+                        item.id = item.containerId;
+                        return item;
+                    });
 
                     this.initializeDataTable();
                     this.messageService.closeLoading();

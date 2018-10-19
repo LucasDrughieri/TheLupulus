@@ -7,6 +7,6 @@ import { BaseService } from './base.service';
 export class UserService extends BaseService {
 
     constructor(http: HttpClient, config: Configuration) {
-        super(http, config, "User");
+        super(http, config, "user");
     }
 }

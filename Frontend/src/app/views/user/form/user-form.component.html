@@ -1,6 +1,6 @@
 <div class="form-group">
     <label class="label-control">Usuario</label>
-    <input type="text" class="form-control" [(ngModel)]="model.username">
+    <input type="text" class="form-control" [(ngModel)]="model.nickname">
 </div>
 
 <div class="form-group">
@@ -10,7 +10,14 @@
 
 <div class="form-group">
     <label class="label-control">Rol</label>
-    <select class="form-control" [(ngModel)]="model.rol">
+    <select class="form-control" [(ngModel)]="model.role">
         <option [value]="rol.id" *ngFor="let rol of roles">{{ rol.text }}</option>
+    </select>
+</div>
+
+<div class="form-group" *ngIf="model.role == 2">
+    <label class="label-control">Cliente</label>
+    <select class="form-control" [(ngModel)]="model.clientId">
+        <option [value]="client.id" *ngFor="let client of clients">{{ client.businessName }}</option>
     </select>
 </div>
