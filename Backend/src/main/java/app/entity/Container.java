@@ -2,8 +2,7 @@ package app.entity;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "containers")
+@Entity(name = "containers")
 public class Container {
 
     @Id

@@ -39,7 +39,11 @@ public class UserService {
         }
 
         User user = new User();
-        user.setClientId(clientRepository.getById(model.getClientId()));
+
+        if (model.getClientId() != null){
+            user.setClientId(clientRepository.getById(model.getClientId()));
+        }
+
         user.setNickname(model.getNickname());
         user.setPassword(model.getPassword());
         UserRole userRole = UserRole.getRole(model.getRole());
