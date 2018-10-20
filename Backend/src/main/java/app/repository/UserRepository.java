@@ -38,6 +38,10 @@ public class UserRepository {
         return (User) getSession().get(User.class, id);
     }
 
+    public User getByNickname(String nickname) {
+        return (User) getSession().get(User.class, nickname);
+    }
+
     public boolean exists(long id){
         User user = (User) getSession().get(User.class,id);
         return user != null;
