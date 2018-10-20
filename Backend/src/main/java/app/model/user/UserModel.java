@@ -4,7 +4,7 @@ public class UserModel {
 
     private Long id;
 
-    private Long clientId;
+    private Integer clientId;
 
     private String nickname;
 
@@ -21,11 +21,11 @@ public class UserModel {
     }
 
     public Long getClientId() {
-        return clientId;
+        return new Long(clientId);
     }
 
     public void setClientId(Long clientId) {
-        this.clientId = clientId;
+        this.clientId = Math.toIntExact(clientId);
     }
 
     public String getNickname() {

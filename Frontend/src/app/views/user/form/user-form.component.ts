@@ -12,7 +12,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
     public model: User;
     
     public roles: any[] = new Array();
-    public clients: Client[] = new Array();
+    public clients: any[] = new Array();
 
     getAllClientSubscription: Subscription;
 
@@ -21,8 +21,12 @@ export class UserFormComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.model = new User();
 
+        this.model.clientId = 0;
+        this.model.role = 0;
+
         this.getAllClients();
 
+        this.roles.push({ id: 0, text: "Seleccione una opción" });
         this.roles.push({ id: 1, text: "Administrador" });
         this.roles.push({ id: 2, text: "Cliente" });
     }
@@ -34,7 +38,12 @@ export class UserFormComponent implements OnInit, OnDestroy {
     private getAllClients() {
         this.getAllClientSubscription = this.clientService.getAll()
             .subscribe(response => {
-                this.clients = response.data;
+
+                this.clients.push({ id: 0, text: "Seleccione una opción" });
+
+                response.data.forEach(element => {
+                    this.clients.push({ id: element.id, text: element.businessName }); 
+                });;
             });
     }
 }

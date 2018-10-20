@@ -24,14 +24,15 @@
                 <tbody>
                     <tr *ngFor="let user of users" class="pointer">
                         <td class='text-center'>{{ user.nickname }}</td>
-                        <td class='text-center'>{{ user.role }}</td>
+                        <td class='text-center' *ngIf="user.role == 1">Administrador</td>
+                        <td class='text-center' *ngIf="user.role == 2">Cliente</td>
                         <td class='text-center'>
                             <label *ngIf="user.visible" class="label label-info">Si</label>
                             <label *ngIf="!user.visible" class="label label-danger">No</label>
                         </td>
                         <td class='text-center'>
                             <button class="btn btn-xs btn-primary" (click)="goToDetail(user.id)" title="Editar">
-                                <i class="fa fa-pencil fa-lg"></i>
+                                <i class="fa fa-eye fa-lg"></i>
                             </button>
                             <button class="btn btn-xs btn-danger" *ngIf="user.visible" (click)="delete(user.id)" title="Desactivar">
                                 <i class="fa fa-trash fa-lg"></i>

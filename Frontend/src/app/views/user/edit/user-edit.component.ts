@@ -50,13 +50,17 @@ export class UserEditComponent implements OnInit, OnDestroy {
         error => this.messageService.closeLoading());
     }
 
-    save(){
-        this.messageService.showLoading();
+    // save(){
+    //     if(this.form.model.role == 1){
+    //         this.form.model.clientId = null;
+    //     }
 
-        this.putSubscription = this.userService.put(this.form.model).subscribe(response => {
-            this.messageService.closeLoading();
-            //success
-        }, 
-        error => this.messageService.closeLoading());
-    }
+    //     this.messageService.showLoading();
+
+    //     this.putSubscription = this.userService.put(this.form.model).subscribe(response => {
+    //         this.messageService.closeLoading();
+    //         this.router.navigate(["/Usuarios"]);
+    //     }, 
+    //     error => this.messageService.closeLoading());
+    // }
 }

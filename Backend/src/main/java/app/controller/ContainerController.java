@@ -49,7 +49,7 @@ public class ContainerController {
 
     @GetMapping
     @ResponseBody
-    public ResponseEntity<Response> getClients(){
+    public ResponseEntity<Response> get(){
         Response response = containerService.getAll();
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);

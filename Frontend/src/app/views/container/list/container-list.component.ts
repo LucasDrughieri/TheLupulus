@@ -53,7 +53,6 @@ export class ContainerListComponent implements OnInit {
                 response => {
                     this.containers = response.data.map(item => {
                         item.visible = true;
-                        item.id = item.containerId;
                         return item;
                     });
 

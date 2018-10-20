@@ -27,19 +27,19 @@
                 <tbody>
                     <tr *ngFor="let beer of beers" class="pointer">
                         <td class='text-center'>{{ beer.name }}</td>
-                        <td class='text-center'>{{ beer.grain }}</td>
+                        <td class='text-center'>{{ beer.granos }}</td>
                         <td class='text-center'>{{ beer.color }}</td>
                         <td class='text-center'>{{ beer.ibu }}</td>
-                        <td class='text-center'>{{ beer.percentage }}</td>
+                        <td class='text-center'>{{ beer.graduation }}</td>
                         <td class='text-center'>
                             <label *ngIf="beer.visible" class="label label-info">Si</label>
                             <label *ngIf="!beer.visible" class="label label-danger">No</label>
                         </td>
                         <td class='text-center'>
-                            <button class="btn btn-xs btn-primary" (click)="goToDetail(beer.id)" title="Editar">
+                            <button class="btn btn-xs btn-primary" (click)="goToDetail(beer.beerId)" title="Editar">
                                 <i class="fa fa-pencil fa-lg"></i>
                             </button>
-                            <button class="btn btn-xs btn-danger" *ngIf="beer.visible" (click)="delete(beer.id)" title="Desactivar">
+                            <button class="btn btn-xs btn-danger" *ngIf="beer.visible" (click)="delete(beer.beerId)" title="Desactivar">
                                 <i class="fa fa-trash fa-lg"></i>
                             </button>
                         </td>

@@ -22,7 +22,7 @@ export class BeerListComponent implements OnInit {
         private dataTableService: DataTableService) { }
 
     ngOnInit(): void {
-        // this.getAllContainers();
+        this.getAllContainers();
         this.initializeDataTable();
     }
 
@@ -51,7 +51,10 @@ export class BeerListComponent implements OnInit {
         this.getAllSubscription = this.beerService.getAll()
             .subscribe(
                 response => {
-                    this.beers = response.data;
+                    this.beers = response.data.map(item => {
+                        item.visible = true;
+                        return item;
+                    });;
 
                     this.initializeDataTable();
                     this.messageService.closeLoading();

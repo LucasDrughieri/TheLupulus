@@ -33,14 +33,16 @@ public class UserService {
             return response;
         }
 
-        if (model.getClientId() != null  && !clientRepository.exists(model.getClientId())){
-            response.addError("El cliente asociado no existe");
-            return response;
+        if(model.getRole() == 2){
+            if (model.getClientId() != null  && !clientRepository.exists(model.getClientId())){
+                response.addError("El cliente asociado no existe");
+                return response;
+            }
         }
 
         User user = new User();
 
-        if (model.getClientId() != null){
+        if (model.getRole() == 2 && model.getClientId() != null){
             user.setClientId(clientRepository.getById(model.getClientId()));
         }
 
@@ -64,18 +66,22 @@ public class UserService {
 
     public Response getAllUsers(){
         Response response = new Response();
+        List<UserModel> model = new ArrayList();
 
         try{
             List<User> users = userRepository.getAll();
 
+            for (User user : users) {
+                model.add(user.getModel());
+            }
+
             if (CollectionUtils.isEmpty(users)){
-                response.data = new ArrayList<>();
+                response.data = new ArrayList();
                 response.addSuccess("No hay usuarios");
                 return response;
             }
 
-            response.data = users;
-            response.addSuccess(String.format("Se devolvió una lista de %s usuarios",users.size()));
+            response.data = model;
             return response;
         }catch (Exception e){
             response.addError("Ocurrió un error al obtener los usuarios");
@@ -92,7 +98,7 @@ public class UserService {
                 response.addError(String.format("No hay usuario con id: %s",id));
                 return response;
             }
-            response.data = user;
+            response.data = user.getModel();
             response.addSuccess("Se encontró el usuario deseado");
             return response;
 

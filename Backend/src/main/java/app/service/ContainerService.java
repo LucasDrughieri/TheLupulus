@@ -51,7 +51,6 @@ public class ContainerService {
             }
 
             response.data = containers;
-            response.addSuccess(String.format("Se devolvió una lista de %s contenedores", containers.size()));
             return response;
         }catch (Exception e){
             response.addError("Ocurrió un error al obtener los contenedores");

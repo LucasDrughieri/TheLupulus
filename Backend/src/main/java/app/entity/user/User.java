@@ -1,6 +1,8 @@
 package app.entity.user;
 
 import app.entity.Client;
+import app.model.user.UserModel;
+
 import javax.persistence.*;
 
 @Entity(name = "users")
@@ -59,5 +61,24 @@ public class User {
 
     public void setRole(Integer role) {
         this.role = role;
+    }
+
+    public UserModel getModel() {
+        UserModel model = new UserModel();
+
+        model.setId(id);
+
+        if(clientId != null){
+            model.setClientId(clientId.getId());
+        }
+        else{
+            model.setClientId(new Long(0));
+        }
+
+        model.setNickname(nickname);
+        model.setPassword(password);
+        model.setRole(role);
+
+        return model;
     }
 }

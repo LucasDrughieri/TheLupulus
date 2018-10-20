@@ -29,7 +29,7 @@ export class BeerEditComponent implements OnInit, OnDestroy {
         }
 
         const beerId = routeParams.id;
-        // this.getModel(contenedorId);
+        this.getModel(beerId);
     }
 
     ngOnDestroy(): void {
@@ -45,6 +45,7 @@ export class BeerEditComponent implements OnInit, OnDestroy {
 
             if(response.data){
                 this.form.model = response.data;
+                this.form.model.id = id;
             }
         }, 
         error => this.messageService.closeLoading());
@@ -55,7 +56,7 @@ export class BeerEditComponent implements OnInit, OnDestroy {
 
         this.putSubscription = this.beerService.put(this.form.model).subscribe(response => {
             this.messageService.closeLoading();
-            //success
+            this.router.navigate(["/Cervezas"]);
         }, 
         error => this.messageService.closeLoading());
     }

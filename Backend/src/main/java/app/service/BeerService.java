@@ -59,7 +59,6 @@ public class BeerService {
             }
 
             response.data = beers;
-            response.addSuccess(String.format("Se devolvió una lista de %s cervezas",beers.size()));
             return response;
         }catch (Exception e){
             response.addError("Ocurrió un error al obtener las cervezas");
@@ -124,26 +123,28 @@ public class BeerService {
             Beer oldBeer = _repository.getById(model.getId());
 
             if (oldBeer != null) {
-                if (!oldBeer.getName().equals(model.getName()) && _repository.getByName(model.getName()) != null){
-                    response.addError("Ya existe el nombre");
-                    return response;
-                }else{
+                //if (!oldBeer.getName().equals(model.getName()) && _repository.getByName(model.getName()) != null){
+                //    response.addError("Ya existe el nombre");
+                //    return response;
+                //}else{
 
                     Beer newBeer = new Beer();
-                    newBeer.setBeerId(oldBeer.getBeerId());
-                    newBeer.setVisible(oldBeer.getVisible());
-                    newBeer.setQuantity(oldBeer.getQuantity());
-                    newBeer.setPricePerLitre(oldBeer.getPricePerLitre());
-                    newBeer.setName(oldBeer.getName());
-                    newBeer.setIbu(oldBeer.getIbu());
-                    newBeer.setGranos(oldBeer.getGranos());
-                    newBeer.setGraduation(oldBeer.getGraduation());
+                    newBeer.setBeerId(model.getId());
+                    newBeer.setVisible(model.getVisible());
+                    newBeer.setQuantity(model.getQuantity());
+                    newBeer.setPricePerLitre(model.getPricePerLitre());
+                    newBeer.setName(model.getName());
+                    newBeer.setIbu(model.getIbu());
+                    newBeer.setGranos(model.getGranos());
+                    newBeer.setGraduation(model.getGraduation());
+                    newBeer.setColor(model.getColor());
+                    newBeer.setDensity(model.getDensity());
 
                     _repository.update(newBeer);
                     response.addSuccess("Cerveza actualizada satisfactoriamente");
                     return response;
-                }
-            }else{
+            }
+            else{
                 response.addError("La cerveza no existe");
                 return response;
             }

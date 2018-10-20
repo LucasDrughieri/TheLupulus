@@ -18,6 +18,6 @@
 <div class="form-group" *ngIf="model.role == 2">
     <label class="label-control">Cliente</label>
     <select class="form-control" [(ngModel)]="model.clientId">
-        <option [value]="client.id" *ngFor="let client of clients">{{ client.businessName }}</option>
+        <option [value]="client.id" *ngFor="let client of clients">{{ client.text }}</option>
     </select>
 </div>

@@ -56,7 +56,6 @@ public class ClientService {
             }
 
             response.data = clients;
-            response.addSuccess(String.format("Se devolvió una lista de %s clientes",clients.size()));
             return response;
         }catch (Exception e){
             response.addError("Ocurrió un error al obtener los clientes");

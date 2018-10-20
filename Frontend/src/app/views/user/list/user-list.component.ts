@@ -53,7 +53,6 @@ export class UserListComponent implements OnInit {
                 response => {
                     this.users = response.data.map(item => {
                         item.visible = true;
-                        item.id = item.userId;
                         return item;
                     });;
 

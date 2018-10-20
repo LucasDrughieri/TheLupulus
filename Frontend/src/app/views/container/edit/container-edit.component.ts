@@ -45,7 +45,6 @@ export class ContainerEditComponent implements OnInit, OnDestroy {
 
             if(response.data){
                 this.form.model = response.data;
-                this.form.model.id = this.form.model.containerId;
             }
         }, 
         error => this.messageService.closeLoading());
