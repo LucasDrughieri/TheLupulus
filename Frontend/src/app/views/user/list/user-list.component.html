@@ -23,8 +23,8 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let user of users" class="pointer">
-                        <td class='text-center'>{{ user.username }}</td>
-                        <td class='text-center'>{{ user.rol }}</td>
+                        <td class='text-center'>{{ user.nickname }}</td>
+                        <td class='text-center'>{{ user.role }}</td>
                         <td class='text-center'>
                             <label *ngIf="user.visible" class="label label-info">Si</label>
                             <label *ngIf="!user.visible" class="label label-danger">No</label>

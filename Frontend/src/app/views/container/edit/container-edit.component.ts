@@ -29,7 +29,7 @@ export class ContainerEditComponent implements OnInit, OnDestroy {
         }
 
         const contenedorId = routeParams.id;
-        // this.getModel(contenedorId);
+        this.getModel(contenedorId);
     }
 
     ngOnDestroy(): void {
@@ -45,6 +45,7 @@ export class ContainerEditComponent implements OnInit, OnDestroy {
 
             if(response.data){
                 this.form.model = response.data;
+                this.form.model.id = this.form.model.containerId;
             }
         }, 
         error => this.messageService.closeLoading());
@@ -55,7 +56,7 @@ export class ContainerEditComponent implements OnInit, OnDestroy {
 
         this.putSubscription = this.containerService.put(this.form.model).subscribe(response => {
             this.messageService.closeLoading();
-            //success
+            this.router.navigate(["/Contenedores"]);
         }, 
         error => this.messageService.closeLoading());
     }

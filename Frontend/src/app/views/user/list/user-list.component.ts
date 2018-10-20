@@ -22,7 +22,7 @@ export class UserListComponent implements OnInit {
         private dataTableService: DataTableService) { }
 
     ngOnInit(): void {
-        // this.getAllUsers();
+        this.getAllUsers();
         this.initializeDataTable();
     }
 
@@ -51,7 +51,11 @@ export class UserListComponent implements OnInit {
         this.getAllSubscription = this.userService.getAll()
             .subscribe(
                 response => {
-                    this.users = response.data;
+                    this.users = response.data.map(item => {
+                        item.visible = true;
+                        item.id = item.userId;
+                        return item;
+                    });;
 
                     this.initializeDataTable();
                     this.messageService.closeLoading();
