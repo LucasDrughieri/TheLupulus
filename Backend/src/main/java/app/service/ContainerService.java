@@ -3,6 +3,7 @@ package app.service;
 import app.entity.Container;
 import app.infraestructure.Response;
 import app.model.ContainerModel;
+import app.model.ContainerStockModel;
 import app.repository.ContainerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -116,6 +117,30 @@ public class ContainerService {
 
         }catch (Exception e ){
             response.addError("Ocurrió un problema al actualizar el contenedor");
+            return response;
+        }
+    }
+
+    public Response addStock(ContainerStockModel model) {
+        Response response = new Response();
+
+        try {
+            Container beer = containerRepository.getById(model.id);
+
+            if (beer != null) {
+                beer.addStock(model.quantity);
+                containerRepository.update(beer);
+
+                response.addSuccess("Stock actualizado correctamente");
+                return response;
+            }
+            else{
+                response.addError("El contenedor no existe");
+                return response;
+            }
+        }
+        catch (Exception e ){
+            response.addError("Ocurrió un problema al actualizar la cerveza");
             return response;
         }
     }

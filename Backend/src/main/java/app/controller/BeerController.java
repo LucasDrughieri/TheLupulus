@@ -2,6 +2,7 @@ package app.controller;
 
 import app.infraestructure.Response;
 import app.model.BeerModel;
+import app.model.BeerStockModel;
 import app.service.BeerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ public class BeerController {
 
     @PostMapping("/beer")
     @ResponseBody
-    public ResponseEntity<Response> createBeer(@RequestBody BeerModel newBeer) {
+    public ResponseEntity<Response> post(@RequestBody BeerModel newBeer) {
         Response<BeerModel> response = _service.create(newBeer);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -29,7 +30,7 @@ public class BeerController {
 
     @DeleteMapping(value = "/beer/{beerId}")
     @ResponseBody
-    public ResponseEntity<Response> deleteClient(@PathVariable("beerId") long beerId){
+    public ResponseEntity<Response> delete(@PathVariable("beerId") long beerId){
         Response response = _service.delete(beerId);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -39,8 +40,18 @@ public class BeerController {
 
     @PutMapping(value = "/beer")
     @ResponseBody
-    public ResponseEntity<Response> updateClient(@RequestBody BeerModel newBeer){
+    public ResponseEntity<Response> put(@RequestBody BeerModel newBeer){
         Response response = _service.update(newBeer);
+
+        if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/beer/stock")
+    @ResponseBody
+    public ResponseEntity<Response> stock(@RequestBody BeerStockModel model){
+        Response response = _service.addStock(model);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 

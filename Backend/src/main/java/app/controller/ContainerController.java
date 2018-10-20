@@ -2,6 +2,7 @@ package app.controller;
 
 import app.infraestructure.Response;
 import app.model.ContainerModel;
+import app.model.ContainerStockModel;
 import app.service.ContainerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,6 +42,16 @@ public class ContainerController {
     @ResponseBody
     public ResponseEntity<Response> put(@RequestBody ContainerModel model){
         Response response = containerService.update(model);
+
+        if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/stock")
+    @ResponseBody
+    public ResponseEntity<Response> stock(@RequestBody ContainerStockModel model){
+        Response response = containerService.addStock(model);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 

@@ -15,6 +15,7 @@ import { UserEditComponent } from "./views/user/edit/user-edit.component";
 import { ClientListComponent } from "./views/client/list/client-list.component";
 import { ClientAddComponent } from "./views/client/add/client-add.component";
 import { ClientEditComponent } from "./views/client/edit/client-edit.component";
+import { StockComponent } from "./views/stock/stock.component";
 
 export const ROUTES: Routes = [
     // Main redirect
@@ -31,6 +32,13 @@ export const ROUTES: Routes = [
         path: '', component: BasicLayoutComponent,
         children: [
             { path: 'Home', component: HomeComponent },
+        ]
+    },
+
+    {
+        path: '', component: BasicLayoutComponent,
+        children: [
+            { path: 'Stock', component: StockComponent },
         ]
     },
 

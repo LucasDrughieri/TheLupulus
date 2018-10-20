@@ -1,0 +1,51 @@
+<div class="wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm-12 col-lg-offset-3 col-md-offset-2">
+            <div class="ibox">
+                <div class="ibox-title text-center">
+                    <h3>Actualizar stocks</h3>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="label-control">Cervezas</label>
+                                <select class="form-control" [(ngModel)]="beerId">
+                                    <option [value]="beer.id" *ngFor="let beer of beers">{{ beer.text }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="label-control">Cantidad</label>
+                                <input type="number" class="form-control" [(ngModel)]="beerQuantity">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <button class="btn btn-primary m-t-md" type="button" (click)="addBeerStock()">Agregar</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="label-control">Contenedores</label>
+                                <select class="form-control" [(ngModel)]="containerId">
+                                    <option [value]="container.id" *ngFor="let container of containers">{{ container.text }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="label-control">Cantidad</label>
+                                <input type="number" class="form-control" [(ngModel)]="containerQuantity">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <button class="btn btn-primary m-t-md" type="button" (click)="addContainerStock()">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

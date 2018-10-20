@@ -30,6 +30,7 @@ import { ClientAddComponent } from "./client/add/client-add.component";
 import { ClientFormComponent } from "./client/form/client-form.component";
 import { ClientListComponent } from "./client/list/client-list.component";
 import { ClientEditComponent } from "./client/edit/client-edit.component";
+import { StockComponent } from "./stock/stock.component";
 
 @NgModule({
     declarations: [
@@ -50,7 +51,8 @@ import { ClientEditComponent } from "./client/edit/client-edit.component";
         ClientAddComponent,
         ClientFormComponent,
         ClientListComponent,
-        ClientEditComponent
+        ClientEditComponent,
+        StockComponent
     ],
     providers: [
         BaseService,

@@ -87,4 +87,8 @@ public class Container {
     public void setVisible(Boolean visible) {
         this.visible = visible;
     }
+
+    public void addStock(Integer quantityToAdd) {
+        quantity = quantity + quantityToAdd;
+    }
 }

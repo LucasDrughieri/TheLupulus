@@ -3,6 +3,7 @@ package app.service;
 import app.entity.Beer;
 import app.infraestructure.Response;
 import app.model.BeerModel;
+import app.model.BeerStockModel;
 import app.repository.BeerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -150,6 +151,30 @@ public class BeerService {
             }
 
         }catch (Exception e ){
+            response.addError("Ocurrió un problema al actualizar la cerveza");
+            return response;
+        }
+    }
+
+    public Response addStock(BeerStockModel model) {
+        Response response = new Response();
+
+        try {
+            Beer beer = _repository.getById(model.id);
+
+            if (beer != null) {
+                beer.addStock(model.quantity);
+                _repository.update(beer);
+
+                response.addSuccess("Stock actualizado correctamente");
+                return response;
+            }
+            else{
+                response.addError("La cerveza no existe");
+                return response;
+            }
+        }
+        catch (Exception e ){
             response.addError("Ocurrió un problema al actualizar la cerveza");
             return response;
         }
