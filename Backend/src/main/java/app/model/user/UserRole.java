@@ -2,7 +2,7 @@ package app.model.user;
 
 public enum UserRole {
 
-    ADMINISTRATOR(0), NORMAL_USER(1);
+    ADMINISTRATOR(1), NORMAL_USER(2);
 
     private Integer code;
 
@@ -12,5 +12,14 @@ public enum UserRole {
 
     public Integer getCode() {
         return code;
+    }
+
+    public static UserRole getRole(Integer code){
+        for (UserRole userRole: UserRole.values()){
+            if (userRole.getCode().equals(code)){
+                return userRole;
+            }
+        }
+        return null;
     }
 }

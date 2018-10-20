@@ -2,14 +2,13 @@ package app.entity;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "beers")
+@Entity(name="beers")
 public class Beer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "beer_id")
-    private Long beerId;
+    private Long id;
 
     private String name;
 
@@ -33,11 +32,11 @@ public class Beer {
     private Boolean visible;
 
     public Long getBeerId() {
-        return beerId;
+        return id;
     }
 
     public void setBeerId(Long beerId) {
-        this.beerId = beerId;
+        this.id = beerId;
     }
 
     public String getName() {

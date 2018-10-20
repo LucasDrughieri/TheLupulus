@@ -6,8 +6,7 @@ import app.entity.order.Order;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "items")
+@Entity(name="items")
 public class Item {
 
     @Id

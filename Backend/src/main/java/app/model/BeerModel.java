@@ -2,23 +2,103 @@ package app.model;
 
 public class BeerModel {
 
-    public String beerId;
+    private Long id;
 
-    public String name;
+    private String name;
 
-    public String granos;
+    private String granos;
 
-    public float density;
+    private float density;
 
-    public String color;
+    private String color;
 
-    public float ibu;
+    private float ibu;
 
-    public float graduation;
+    private float graduation;
 
-    public float pricePerLitre;
+    private float pricePerLitre;
 
-    public Integer quantity;
+    private Integer quantity;
 
-    public Boolean visible;
+    private Boolean visible;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getGranos() {
+        return granos;
+    }
+
+    public void setGranos(String granos) {
+        this.granos = granos;
+    }
+
+    public float getDensity() {
+        return density;
+    }
+
+    public void setDensity(float density) {
+        this.density = density;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public float getIbu() {
+        return ibu;
+    }
+
+    public void setIbu(float ibu) {
+        this.ibu = ibu;
+    }
+
+    public float getGraduation() {
+        return graduation;
+    }
+
+    public void setGraduation(float graduation) {
+        this.graduation = graduation;
+    }
+
+    public float getPricePerLitre() {
+        return pricePerLitre;
+    }
+
+    public void setPricePerLitre(float pricePerLitre) {
+        this.pricePerLitre = pricePerLitre;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Boolean getVisible() {
+        return visible;
+    }
+
+    public void setVisible(Boolean visible) {
+        this.visible = visible;
+    }
 }

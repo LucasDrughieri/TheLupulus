@@ -2,8 +2,7 @@ package app.entity;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "containers")
+@Entity(name = "containers")
 public class Container {
 
     @Id
@@ -25,11 +24,11 @@ public class Container {
 
     private Boolean visible;
 
-    public Long getContainerId() {
+    public Long getId() {
         return containerId;
     }
 
-    public void setContainerId(Long containerId) {
+    public void setId(Long containerId) {
         this.containerId = containerId;
     }
 
