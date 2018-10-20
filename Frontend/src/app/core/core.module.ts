@@ -9,6 +9,7 @@ import { MessageService } from './services/message.service';
 import { BaseService } from './services/base.service';
 import { ErrorHandlerService } from './services/error-handler.service';
 import { HttpServiceInterceptor } from './interceptors/http-service.interceptor';
+import { LoginService } from './services/login.service';
 
 @NgModule({
     declarations: [],
@@ -24,6 +25,7 @@ import { HttpServiceInterceptor } from './interceptors/http-service.interceptor'
         MessageService,
         BaseService,
         BeerService,
+        LoginService,
         ErrorHandlerService,
         { provide: HTTP_INTERCEPTORS, useClass: HttpServiceInterceptor, multi: true },
     ],

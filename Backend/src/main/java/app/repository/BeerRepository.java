@@ -39,7 +39,7 @@ public class BeerRepository {
     }
 
     public Beer getByName(String name) {
-        return (Beer) getSession().get(Beer.class, name);
+        return (Beer) getSession().get(Beer.class,name);
     }
 
     public void update(Beer beer) {

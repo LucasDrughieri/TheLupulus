@@ -51,6 +51,8 @@ export class ContainerEditComponent implements OnInit, OnDestroy {
     }
 
     save(){
+        if(this.form.validate()) return;
+        
         this.messageService.showLoading();
 
         this.putSubscription = this.containerService.put(this.form.model).subscribe(response => {

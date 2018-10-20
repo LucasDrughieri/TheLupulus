@@ -24,6 +24,8 @@ export class ContainerAddComponent implements OnInit, OnDestroy {
     }
 
     save(){
+        if(this.form.validate()) return;
+        
         this.messageService.showLoading();
 
         this.postSubscription = this.containerService.post(this.form.model).subscribe(response => {

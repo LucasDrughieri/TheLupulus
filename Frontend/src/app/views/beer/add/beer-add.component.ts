@@ -24,6 +24,8 @@ export class BeerAddComponent implements OnInit, OnDestroy {
     }
 
     save(){
+        if(this.form.validate()) return;
+
         this.messageService.showLoading();
 
         this.postSubscription = this.beerService.post(this.form.model).subscribe(response => {

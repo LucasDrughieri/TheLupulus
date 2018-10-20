@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoginModel } from '../../models/login';
 import { MessageService } from '../../core/services/message.service';
+import { LoginService } from '../../core/services/login.service';
 
 @Component({
     templateUrl: 'login.component.html',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     constructor(
         private router: Router,
+        private loginService: LoginService,
         private messageService: MessageService) {
 
         this.model = new LoginModel();
@@ -33,32 +35,46 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     login() {
-        this.onLoginSuccess();
-        //this.messageService.showLoading();
+        this.messageService.showLoading();
 
-        // this.loginSubscription = this.authService.post(this.model)
-        //     .subscribe(
-        //         response => {
-        //             this.messageService.closeLoading();
-        //             this.onLoginSuccess(response.data);
-        //         },
-        //         response => {
-        //             this.messageService.closeLoading();
-        //             if (response.error && response.error.messages) {
-        //                 this.messageService.showMessages(response.error.messages);
-        //             }
-        //             else {
-        //                 this.messageService.showError("Ha ocurrido un error al ingresar al sistema");
-        //             }
+        this.loginSubscription = this.loginService.login(this.model)
+            .subscribe(
+                response => {
+                    this.messageService.closeLoading();
+                    this.onLoginSuccess(response.data);
+                },
+                response => {
+                    this.messageService.closeLoading();
+                    if (response.error && response.error.messages) {
+                        this.messageService.showMessages(response.error.messages);
+                    }
+                    else {
+                        this.messageService.showError("Ha ocurrido un error al ingresar al sistema");
+                    }
 
-        //         });
+                });
     }
 
-    onLoginSuccess() {
+    onLoginSuccess(data) {
+        console.log(data);
         this.router.navigate(['/Home']);
     }
 
     onSubmit() {
-        this.login();
+        var hasError = false;
+
+        if(!this.model.user || this.model.user == ''){
+            hasError = true;
+            this.messageService.showError('El usuario es requerido');
+        }
+
+        if(!this.model.user || this.model.user == ''){
+            hasError = true;
+            this.messageService.showError('La contraseña es requerida');
+        }
+
+        if(!hasError){
+            this.login();
+        }
     }
 }

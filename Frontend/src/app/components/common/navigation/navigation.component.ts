@@ -20,6 +20,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
+  goHome(){
+    this.router.navigate(['/Home']);
+  }
+
   ngAfterViewInit() {
     jQuery('#side-menu').metisMenu();
 

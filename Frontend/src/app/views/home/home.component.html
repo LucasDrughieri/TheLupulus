@@ -1,91 +1,81 @@
 <div class="wrapper-content animated fadeInRight">
 
     <div class="text-center text-underline">
-        <h2>Opciones de Operador</h2>
+        <h2>Acciones de Administrador</h2>
     </div>
 
     <div class="row">
         <div class="col-md-4">
-            <div class="widget navy-bg">
+            <div class="widget navy-bg pointer" (click)="navigate('/Clientes')">
                 <div class="row">
                     <div class="col-xs-4">
                         <i class="fa fa-users fa-5x"></i>
                     </div>
                     <div class="col-xs-8 text-right">
                         <span> Clientes </span>
-                        <h2 class="font-bold">5</h2>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="widget navy-bg">
+            <div class="widget navy-bg pointer">
                 <div class="row">
                     <div class="col-xs-4">
                         <i class="fa fa-book fa-5x"></i>
                     </div>
                     <div class="col-xs-8 text-right">
                         <span> Stock </span>
-                        <h2 class="font-bold">15</h2>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="widget navy-bg">
+            <div class="widget navy-bg pointer">
                 <div class="row">
                     <div class="col-xs-4">
                         <i class="fa fa-tasks fa-5x"></i>
                     </div>
                     <div class="col-xs-8 text-right">
                         <span> Pedidos </span>
-                        <h2 class="font-bold">25</h2>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="text-center text-underline">
-        <h2>Opciones de Administrador</h2>
-    </div>
-
     <div class="row">
         <div class="col-md-4">
-            <div class="widget navy-bg">
+            <div class="widget navy-bg pointer" (click)="navigate('/Usuarios')">
                 <div class="row">
                     <div class="col-xs-4">
                         <i class="fa fa-users fa-5x"></i>
                     </div>
                     <div class="col-xs-8 text-right">
                         <span> Usuarios </span>
-                        <h2 class="font-bold">5</h2>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="widget navy-bg">
+            <div class="widget navy-bg pointer" (click)="navigate('/Cervezas')">
                 <div class="row">
                     <div class="col-xs-4">
                         <i class="fa fa-beer fa-5x"></i>
                     </div>
                     <div class="col-xs-8 text-right">
                         <span> Cervezas </span>
-                        <h2 class="font-bold">15</h2>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="widget navy-bg">
+            <div class="widget navy-bg pointer" (click)="navigate('/Contenedores')">
                 <div class="row">
                     <div class="col-xs-4">
                         <i class="fa fa-archive fa-5x"></i>
                     </div>
                     <div class="col-xs-8 text-right">
                         <span> Contenedores </span>
-                        <h2 class="font-bold">25</h2>
                     </div>
                 </div>
             </div>

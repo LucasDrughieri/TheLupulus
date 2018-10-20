@@ -19,6 +19,10 @@ export class MessageService {
         });
     }
 
+    public clear(){
+        this.toastrService.clear();
+    }
+
     public showError(message) {
         this.toastrService.error(message);
     }

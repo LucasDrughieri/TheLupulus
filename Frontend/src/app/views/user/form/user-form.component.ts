@@ -3,6 +3,7 @@ import { User } from '../../../models/user';
 import { Client } from '../../../models/client';
 import { ClientService } from '../../../core/services/client.service';
 import { Subscription } from 'rxjs';
+import { MessageService } from '../../../core/services/message.service';
 
 @Component({    
     selector: 'user-form',
@@ -16,7 +17,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
     getAllClientSubscription: Subscription;
 
-    constructor(private clientService: ClientService) { }
+    constructor(private clientService: ClientService, private messageService: MessageService) { }
 
     ngOnInit(): void {
         this.model = new User();
@@ -46,4 +47,32 @@ export class UserFormComponent implements OnInit, OnDestroy {
                 });;
             });
     }
+
+    validate(){
+        var hasErrors = false;
+        this.messageService.clear();
+
+        if(!this.model.nickname || this.model.nickname == ''){
+           hasErrors = true;
+           this.messageService.showError('El usuario es requerido');
+        }
+
+        if(!this.model.password || this.model.password == ''){
+           hasErrors = true;
+           this.messageService.showError('La contraseña es requerida');
+        }
+
+        if(!this.model.role || this.model.role < 1 || this.model.role > 2){
+           hasErrors = true;
+           this.messageService.showError('El rol es requerido');
+        }
+        else{
+            if(this.model.role == 2 && (!this.model.clientId || this.model.clientId <= 0)){
+                hasErrors = true;
+                this.messageService.showError('El cliente es requerido');
+            }
+        }
+
+        return hasErrors;
+   }
 }

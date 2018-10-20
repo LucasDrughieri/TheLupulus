@@ -24,7 +24,7 @@ public class UserSessionService {
 
         Response response = new Response();
 
-        User user = _userRepository.getById(1);
+        User user = _userRepository.getByNickname(model.getUser());
 
         if(user == null){
             response.addError("Usuario inexistente.");
