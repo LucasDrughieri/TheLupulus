@@ -3,9 +3,11 @@ package app.entity.order;
 import app.entity.Beer;
 import app.entity.Container;
 import app.entity.order.Order;
+import lombok.*;
 
 import javax.persistence.*;
 
+@Data
 @Entity(name="items")
 public class Item {
 
@@ -26,35 +28,10 @@ public class Item {
     @JoinColumn(name = "container_id")
     private Container containerId;
 
-    public Long getItemId() {
-        return itemId;
+    private Long cantidad;
+
+    public Float getPrecio() {
+        return beerId.getPricePerLitre() * containerId.getQuantity() * cantidad;
     }
 
-    public void setItemId(Long itemId) {
-        this.itemId = itemId;
-    }
-
-    public Order getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Order orderId) {
-        this.orderId = orderId;
-    }
-
-    public Beer getBeerId() {
-        return beerId;
-    }
-
-    public void setBeerId(Beer beerId) {
-        this.beerId = beerId;
-    }
-
-    public Container getContainerId() {
-        return containerId;
-    }
-
-    public void setContainerId(Container containerId) {
-        this.containerId = containerId;
-    }
 }

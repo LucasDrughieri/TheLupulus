@@ -1,5 +1,6 @@
 package app.repository;
 
+import app.entity.order.Item;
 import app.entity.user.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,8 +12,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class UserRepository {
-
+public class ItemRepository {
     @Autowired
     private SessionFactory _sessionFactory;
 
@@ -20,7 +20,7 @@ public class UserRepository {
         return _sessionFactory.getCurrentSession();
     }
 
-    public User save(User user) {
+    public Item save(Item user) {
         getSession().save(user);
         return user;
     }
@@ -30,20 +30,11 @@ public class UserRepository {
     }
 
     @SuppressWarnings("unchecked")
-    public List<User> getAll() {
-        return getSession().createQuery("from users").list();
+    public List<Item> getAll() {
+        return getSession().createQuery("from items").list();
     }
 
-    public User getById(Long id) {
-        return (User) getSession().get(User.class, id);
-    }
-
-    public User getByNickname(String nickname) {
-        return (User) getSession().get(User.class, nickname);
-    }
-
-    public boolean exists(long id){
-        User user = (User) getSession().get(User.class,id);
-        return user != null;
+    public Item getById(long id) {
+        return (Item) getSession().get(Item.class, id);
     }
 }

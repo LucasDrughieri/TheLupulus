@@ -2,10 +2,16 @@ package app.model.order;
 
 import app.entity.Beer;
 import app.entity.Container;
+import lombok.Data;
 
+@Data
 public class Item {
 
-    private Long itemId;
+    private Long idContenedor;
+    private Long idCerveza;
+    private Long cantidad;
+
+    /* private Long itemId;
 
     private Order orderId;
 
@@ -43,5 +49,5 @@ public class Item {
 
     public void setContainerId(Container containerId) {
         this.containerId = containerId;
-    }
+    }*/
 }

@@ -47,4 +47,8 @@ public class UserSessionRepository {
 
         return userSession != null;
     }
+
+    public UserSession getByToken(String token) {
+        return (UserSession) getSession().get(UserSession.class, token);
+    }
 }

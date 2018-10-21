@@ -124,7 +124,7 @@ public class BeerService {
             Beer oldBeer = _repository.getById(model.getId());
 
             if (oldBeer != null) {
-                //if (!oldBeer.getName().equals(model.getName()) && _repository.getByName(model.getName()) != null){
+                //if (!oldBeer.getName().equals(model.getName()) && _orderRepository.getByName(model.getName()) != null){
                 //    response.addError("Ya existe el nombre");
                 //    return response;
                 //}else{
