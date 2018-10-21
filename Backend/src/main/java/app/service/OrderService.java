@@ -145,21 +145,42 @@ public class OrderService {
         }
     }
 
-    public Response getById(long id){
+    public Response getById(long id, User user){
         Response response = new Response();
+        Order orderModel = new Order();
         try {
+
+            // First get order
             app.entity.order.Order order = _orderRepository.getById(id);
 
             if (order == null) {
                 response.addError(String.format("No hay pedido con id: %s",id));
                 return response;
             }
-            response.data = order;
-            response.addSuccess("Se encontró la cerveza deseada");
+
+            // Then get items
+            List<app.entity.order.Item> items = _itemRepository.getByOrderId(order);
+
+            Float total = 0.0f;
+            for(app.entity.order.Item item: items) {
+                total += item.getPrecio();
+            }
+
+            orderModel.setItems(items);
+            orderModel.setCliente(user);
+            orderModel.setIdPedido(id);
+            orderModel.setTotal(total);
+            orderModel.setPagado(order.getPagado());
+            orderModel.setEstado(order.getStatus());
+
+            // Return model instead of entities
+
+            response.data = orderModel;
+            response.addSuccess("Se encontró el pedido deseado");
             return response;
 
         }catch (Exception e){
-            response.addError("Ocurrió un problema al buscar la cerveza");
+            response.addError("Ocurrió un problema al buscar el pedido");
             return response;
         }
     }

@@ -73,7 +73,7 @@ public class OrderController {
         User user = session.getUserId();
 
         // Create order
-        Response<Order> response = _orderService.getById(pedidoId);
+        Response<Order> response = _orderService.getById(pedidoId, user);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 

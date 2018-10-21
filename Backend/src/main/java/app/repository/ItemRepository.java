@@ -1,6 +1,7 @@
 package app.repository;
 
 import app.entity.order.Item;
+import app.entity.order.Order;
 import app.entity.user.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -37,4 +38,6 @@ public class ItemRepository {
     public Item getById(long id) {
         return (Item) getSession().get(Item.class, id);
     }
+
+    public List<Item> getByOrderId(Order order) { return getSession().createQuery("from items item where item.orderId.id = " + order.getId()).list(); }
 }
