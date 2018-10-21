@@ -30,6 +30,12 @@ public class OrderRepository {
         return getSession().createQuery("from orders").list();
     }
 
+    @SuppressWarnings("unchecked")
+    public List<Order> getAll(Long userId) {
+        return getSession().createQuery("from orders order where order.userId.id = " + userId)
+                .list();
+    }
+
     public Order getById(long id) {
         return (Order) getSession().get(Order.class, id);
     }

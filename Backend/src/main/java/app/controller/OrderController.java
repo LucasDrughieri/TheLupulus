@@ -48,5 +48,54 @@ public class OrderController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/pedido")
+    @ResponseBody
+    public ResponseEntity<Response> getall(@RequestHeader(value = "X-AuthToken") String sessionToken) {
+
+        // Get user logged in
+        UserSession session = _userSessionRepository.getByToken(sessionToken);
+        User user = session.getUserId();
+
+        // Create order
+        Response<Order> response = _orderService.getAll(user.getId());
+
+        if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/pedido/{pedidoId}")
+    @ResponseBody
+    public ResponseEntity<Response> get(@PathVariable("pedidoId") Long pedidoId, @RequestHeader(value = "X-AuthToken") String sessionToken) {
+
+        // Get user logged in
+        UserSession session = _userSessionRepository.getByToken(sessionToken);
+        User user = session.getUserId();
+
+        // Create order
+        Response<Order> response = _orderService.getById(pedidoId);
+
+        if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PatchMapping("/pedido/{pedidoId}")
+    @ResponseBody
+    public ResponseEntity<Response> patch(@RequestBody Order order, @PathVariable("pedidoId") Long pedidoId, @RequestHeader(value = "X-AuthToken") String sessionToken) {
+
+        // Get user logged in
+        UserSession session = _userSessionRepository.getByToken(sessionToken);
+        User user = session.getUserId();
+
+        // Create order
+        Response<Order> response = _orderService.update(pedidoId, user, order);
+
+        if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
 
 }

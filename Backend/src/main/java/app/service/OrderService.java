@@ -125,6 +125,26 @@ public class OrderService {
         }
     }
 
+    public Response getAll(Long userId){
+        Response response = new Response();
+
+        try{
+            List<app.entity.order.Order> orders = _orderRepository.getAll(userId);
+
+            if (CollectionUtils.isEmpty(orders)){
+                response.data = new ArrayList<>();
+                response.addSuccess("No hay pedidos.");
+                return response;
+            }
+
+            response.data = orders;
+            return response;
+        }catch (Exception e){
+            response.addError("Ocurrió un error al obtener los pedidos.");
+            return response;
+        }
+    }
+
     public Response getById(long id){
         Response response = new Response();
         try {
@@ -154,5 +174,19 @@ public class OrderService {
             response.addError("Ocurrió un problema al eliminar el pedido");
             return response;
         }
+    }
+
+    public Response update(Long pedidoId, User user, Order order) {
+
+        app.entity.order.Order orderEntity = _orderRepository.getById(pedidoId);
+        orderEntity.setStatus(order.getEstado());
+        orderEntity.setPagado(order.getPagado());
+
+        orderEntity = _orderRepository.save(orderEntity);
+
+        Response response = new Response();
+        response.addSuccess("Pedido modificado con éxito.");
+        response.data = orderEntity;
+        return response;
     }
 }
