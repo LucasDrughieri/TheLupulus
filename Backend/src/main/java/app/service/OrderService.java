@@ -4,6 +4,7 @@ import app.entity.Beer;
 import app.entity.Container;
 import app.entity.order.OrderState;
 import app.entity.user.User;
+import app.entity.user.UserRole;
 import app.infraestructure.Response;
 import app.model.order.Item;
 import app.model.order.Order;
@@ -36,7 +37,10 @@ public class OrderService {
     public Response create(List<Item> itemsModels, User user){
 
         Response response = new Response();
-
+        if(user.getRole() != UserRole.NORMAL_USER.getCode()) {
+            response.addError("Solo un usuario tipo ‘cliente’ puede crear pedidos.");
+            return response;
+        }
 
         // First create order
         app.entity.order.Order order = new app.entity.order.Order();
@@ -45,7 +49,12 @@ public class OrderService {
         order.setVisible(true);
         order.setStatus(OrderState.PENDING.getCode());
 
-        order = _orderRepository.save(order);
+        try{
+            order = _orderRepository.save(order);
+        } catch (Exception e){
+            response.addError("Ocurrió un error al intentar crear el pedido.");
+            return response;
+        }
 
         List<app.entity.order.Item> items = new ArrayList<>();
         Float total = 0.0f;
@@ -58,13 +67,35 @@ public class OrderService {
             itemEntity.setBeerId(beer);
 
             Container container = _containerRepository.getById(itemModel.getIdContenedor());
+
+            // cantidad <= contenedor.quantity && contenedor.capacity * cantidad <= cerveza.quantity
+            if(itemModel.getCantidad() >= container.getQuantity() || beer.getQuantity() <= container.getCapacity() * itemModel.getCantidad()) {
+                for(app.entity.order.Item item: items) {
+                    _itemRepository.delete(item.getItemId());
+                }
+                _orderRepository.delete(order.getId());
+                response.addError("No se puede satisfacer el pedido con el stock existente.");
+                return response;
+            }
+
+            container.setQuantity(container.getQuantity() - itemModel.getCantidad().intValue());
+            beer.setQuantity(beer.getQuantity() - container.getCapacity() * itemModel.getCantidad().intValue());
+
+            _containerRepository.save(container);
+            _beerRepository.save(beer);
+
             itemEntity.setContainerId(container);
 
             itemEntity.setCantidad(itemModel.getCantidad());
 
             itemEntity.setOrderId(order);
 
-            itemEntity = _itemRepository.save(itemEntity);
+            try{
+                itemEntity = _itemRepository.save(itemEntity);
+            } catch (Exception e){
+                response.addError("Ocurrió un error al intentar crear un item para el pedido.");
+                return response;
+            }
 
             items.add(itemEntity);
 
@@ -84,25 +115,6 @@ public class OrderService {
         response.addSuccess("Orden creada satisfactoriamente.");
         return response;
 
-        /*if (model.getId() != null && _orderRepository.exists(model.getId())){
-            response.addError("El cerveza ya existe");
-            return response;
-        }
-
-        app.entity.order.Order order = new app.entity.order.Order();
-        order.setAmount(model.getAmount());
-        order.setDate(model.getDate());
-        order.setStatus(model.getStatus());
-        order.setUserId(model.getUserId());
-        order.setVisible(model.getVisible());
-
-        try{
-            response.data = _orderRepository.save(order);
-            response.addSuccess("Orden creada satisfactoriamente.");
-        } catch (Exception e){
-            response.addError("Ocurrió un error al intentar crear la orden.");
-        }
-        return response;*/
     }
 
     public Response getAll(){
