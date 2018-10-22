@@ -57,7 +57,7 @@ public class OrderController {
         User user = session.getUserId();
 
         // Create order
-        Response<Order> response = _orderService.getAll(user.getId());
+        Response<Order> response = _orderService.getAll(user);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 

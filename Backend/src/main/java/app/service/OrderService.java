@@ -137,11 +137,17 @@ public class OrderService {
         }
     }
 
-    public Response getAll(Long userId){
+    public Response getAll(User user){
         Response response = new Response();
 
         try{
-            List<app.entity.order.Order> orders = _orderRepository.getAll(userId);
+            List<app.entity.order.Order> orders;
+            if(user.getRole() != UserRole.ADMINISTRATOR.getCode()) {
+                orders = _orderRepository.getAll(user.getId());
+            }
+            else {
+               orders = _orderRepository.getAll();
+            }
 
             if (CollectionUtils.isEmpty(orders)){
                 response.data = new ArrayList<>();
@@ -164,6 +170,11 @@ public class OrderService {
 
             // First get order
             app.entity.order.Order order = _orderRepository.getById(id);
+
+            if(order.getUserId().getId() != user.getId() || user.getRole() != UserRole.ADMINISTRATOR.getCode()) {
+                response.addError("Pedido no encontrado");
+                return response;
+            }
 
             if (order == null) {
                 response.addError(String.format("No hay pedido con id: %s",id));
