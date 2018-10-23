@@ -49,6 +49,10 @@ public class UserSessionRepository {
     }
 
     public UserSession getByToken(String token) {
-        return (UserSession) getSession().get(UserSession.class, token);
+        Criteria criteria = getSession().createCriteria(UserSession.class);
+        UserSession user = (UserSession) criteria.add(Restrictions.eq("token", token))
+                .uniqueResult();
+
+        return user;
     }
 }

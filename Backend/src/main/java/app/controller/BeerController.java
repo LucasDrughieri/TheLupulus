@@ -28,9 +28,9 @@ public class BeerController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/beer/{beerId}")
+    @DeleteMapping(value = "/beer/{beer}")
     @ResponseBody
-    public ResponseEntity<Response> delete(@PathVariable("beerId") long beerId){
+    public ResponseEntity<Response> delete(@PathVariable("beer") long beerId){
         Response response = _service.delete(beerId);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -68,9 +68,9 @@ public class BeerController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/beer/{beerId}")
+    @GetMapping(value = "/beer/{beer}")
     @ResponseBody
-    public ResponseEntity<Response> getById(@PathVariable("beerId") long idClient){
+    public ResponseEntity<Response> getById(@PathVariable("beer") long idClient){
         Response response = _service.getById(idClient);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);

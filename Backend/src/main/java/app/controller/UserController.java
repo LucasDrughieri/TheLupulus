@@ -30,9 +30,9 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/{userId}")
+    @DeleteMapping(value = "/{user}")
     @ResponseBody
-    public ResponseEntity<Response> deleteUser(@PathVariable("userId") long userId){
+    public ResponseEntity<Response> deleteUser(@PathVariable("user") long userId){
         Response response = userService.deleteUser(userId);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -50,9 +50,9 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{userId}")
+    @GetMapping(value = "/{user}")
     @ResponseBody
-    public ResponseEntity<Response> getById(@PathVariable("userId") long userId){
+    public ResponseEntity<Response> getById(@PathVariable("user") long userId){
         Response response = userService.getById(userId);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);

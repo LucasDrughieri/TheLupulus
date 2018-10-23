@@ -2,7 +2,6 @@ package app.entity.order;
 
 import app.entity.Beer;
 import app.entity.Container;
-import app.entity.order.Order;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,20 +17,20 @@ public class Item {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
-    private Order orderId;
+    private Order order;
 
     @ManyToOne
     @JoinColumn(name = "beer_id")
-    private Beer beerId;
+    private Beer beer;
 
     @ManyToOne
     @JoinColumn(name = "container_id")
-    private Container containerId;
+    private Container container;
 
     private Long cantidad;
 
     public Float getPrecio() {
-        return beerId.getPricePerLitre() * containerId.getQuantity() * cantidad;
+        return beer.getPricePerLitre() * container.getQuantity() * cantidad;
     }
 
 }

@@ -28,9 +28,9 @@ public class ContainerController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "{containerId}")
+    @DeleteMapping(value = "{container}")
     @ResponseBody
-    public ResponseEntity<Response> delete(@PathVariable("containerId") long containerId){
+    public ResponseEntity<Response> delete(@PathVariable("container") long containerId){
         Response response = containerService.delete(containerId);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -68,9 +68,9 @@ public class ContainerController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping(value = "{containerId}")
+    @GetMapping(value = "{container}")
     @ResponseBody
-    public ResponseEntity<Response> getById(@PathVariable("containerId") long containerId){
+    public ResponseEntity<Response> getById(@PathVariable("container") long containerId){
         Response response = containerService.getById(containerId);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);

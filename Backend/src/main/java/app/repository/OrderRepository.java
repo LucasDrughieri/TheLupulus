@@ -32,7 +32,7 @@ public class OrderRepository {
 
     @SuppressWarnings("unchecked")
     public List<Order> getAll(Long userId) {
-        return getSession().createQuery("from orders order where order.userId.id = " + userId)
+        return getSession().createQuery("from orders order where order.user.id = " + userId)
                 .list();
     }
 

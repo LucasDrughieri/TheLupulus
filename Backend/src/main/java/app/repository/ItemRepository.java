@@ -39,5 +39,5 @@ public class ItemRepository {
         return (Item) getSession().get(Item.class, id);
     }
 
-    public List<Item> getByOrderId(Order order) { return getSession().createQuery("from items item where item.orderId.id = " + order.getId()).list(); }
+    public List<Item> getByOrderId(Order order) { return getSession().createQuery("from items item where item.order.id = " + order.getId()).list(); }
 }

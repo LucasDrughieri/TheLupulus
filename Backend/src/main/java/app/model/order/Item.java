@@ -7,17 +7,17 @@ import lombok.Data;
 @Data
 public class Item {
 
-    private Long idContenedor;
-    private Long idCerveza;
-    private Long cantidad;
+    Long idContenedor;
+    Long idCerveza;
+    Long cantidad;
 
     /* private Long itemId;
 
-    private Order orderId;
+    private Order order;
 
-    private Beer beerId;
+    private Beer beer;
 
-    private Container containerId;
+    private Container container;
 
     public Long getItemId() {
         return itemId;
@@ -27,27 +27,27 @@ public class Item {
         this.itemId = itemId;
     }
 
-    public Order getOrderId() {
-        return orderId;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrderId(Order orderId) {
-        this.orderId = orderId;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
-    public Beer getBeerId() {
-        return beerId;
+    public Beer getBeer() {
+        return beer;
     }
 
-    public void setBeerId(Beer beerId) {
-        this.beerId = beerId;
+    public void setBeer(Beer beer) {
+        this.beer = beer;
     }
 
-    public Container getContainerId() {
-        return containerId;
+    public Container getContainer() {
+        return container;
     }
 
-    public void setContainerId(Container containerId) {
-        this.containerId = containerId;
+    public void setContainer(Container container) {
+        this.container = container;
     }*/
 }

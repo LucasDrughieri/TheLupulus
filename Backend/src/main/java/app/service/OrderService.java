@@ -45,7 +45,7 @@ public class OrderService {
         // First create order
         app.entity.order.Order order = new app.entity.order.Order();
         order.setDate(new Date());
-        order.setUserId(user);
+        order.setUser(user);
         order.setVisible(true);
         order.setStatus(OrderState.PENDING.getCode());
 
@@ -64,7 +64,7 @@ public class OrderService {
             app.entity.order.Item itemEntity = new app.entity.order.Item();
 
             Beer beer = _beerRepository.getById(itemModel.getIdCerveza());
-            itemEntity.setBeerId(beer);
+            itemEntity.setBeer(beer);
 
             Container container = _containerRepository.getById(itemModel.getIdContenedor());
 
@@ -84,11 +84,11 @@ public class OrderService {
             _containerRepository.save(container);
             _beerRepository.save(beer);
 
-            itemEntity.setContainerId(container);
+            itemEntity.setContainer(container);
 
             itemEntity.setCantidad(itemModel.getCantidad());
 
-            itemEntity.setOrderId(order);
+            itemEntity.setOrder(order);
 
             try{
                 itemEntity = _itemRepository.save(itemEntity);
@@ -171,7 +171,7 @@ public class OrderService {
             // First get order
             app.entity.order.Order order = _orderRepository.getById(id);
 
-            if(order.getUserId().getId() != user.getId() || user.getRole() != UserRole.ADMINISTRATOR.getCode()) {
+            if(order.getUser().getId() != user.getId() || user.getRole() != UserRole.ADMINISTRATOR.getCode()) {
                 response.addError("Pedido no encontrado");
                 return response;
             }
