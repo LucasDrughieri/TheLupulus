@@ -37,7 +37,7 @@ public class OrderController {
 
     @PostMapping("/pedido")
     @ResponseBody
-    public ResponseEntity<Response> post(@RequestBody ItemList items, @RequestHeader(value = "X-AuthToken") String sessionToken) {
+    public ResponseEntity<Response> post(@RequestBody ItemList items, @RequestHeader(value = "Authorization") String sessionToken) {
 
         // Get user logged in
         UserSession session = _userSessionRepository.getByToken(sessionToken);
@@ -53,7 +53,7 @@ public class OrderController {
 
     @GetMapping("/pedido")
     @ResponseBody
-    public ResponseEntity<Response> getall(@RequestHeader(value = "X-AuthToken") String sessionToken) {
+    public ResponseEntity<Response> getall(@RequestHeader(value = "Authorization") String sessionToken) {
 
         // Get user logged in
         UserSession session = _userSessionRepository.getByToken(sessionToken);
@@ -69,7 +69,7 @@ public class OrderController {
 
     @GetMapping("/pedido/{pedidoId}")
     @ResponseBody
-    public ResponseEntity<Response> get(@PathVariable("pedidoId") Long pedidoId, @RequestHeader(value = "X-AuthToken") String sessionToken) {
+    public ResponseEntity<Response> get(@PathVariable("pedidoId") Long pedidoId, @RequestHeader(value = "Authorization") String sessionToken) {
 
         // Get user logged in
         UserSession session = _userSessionRepository.getByToken(sessionToken);
@@ -85,7 +85,7 @@ public class OrderController {
 
     @PatchMapping("/pedido/{pedidoId}")
     @ResponseBody
-    public ResponseEntity<Response> patch(@RequestBody Order order, @PathVariable("pedidoId") Long pedidoId, @RequestHeader(value = "X-AuthToken") String sessionToken) {
+    public ResponseEntity<Response> patch(@RequestBody Order order, @PathVariable("pedidoId") Long pedidoId, @RequestHeader(value = "Authorization") String sessionToken) {
 
         // Get user logged in
         UserSession session = _userSessionRepository.getByToken(sessionToken);

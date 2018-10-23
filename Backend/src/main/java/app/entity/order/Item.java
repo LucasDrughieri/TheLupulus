@@ -2,6 +2,7 @@ package app.entity.order;
 
 import app.entity.Beer;
 import app.entity.Container;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,8 +16,9 @@ public class Item {
     @Column(name = "item_id")
     private Long itemId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
+    @JsonIgnore
     private Order order;
 
     @ManyToOne

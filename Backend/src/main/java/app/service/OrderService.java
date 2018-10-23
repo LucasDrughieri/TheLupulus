@@ -12,9 +12,11 @@ import app.repository.BeerRepository;
 import app.repository.ContainerRepository;
 import app.repository.ItemRepository;
 import app.repository.OrderRepository;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,6 +36,7 @@ public class OrderService {
     @Autowired
     ContainerRepository _containerRepository;
 
+    @Transactional
     public Response create(List<Item> itemsModels, User user){
 
         Response response = new Response();
@@ -104,7 +107,7 @@ public class OrderService {
 
         // Return response as it's specified in swagger
         Order orderModel = new Order();
-        orderModel.setCliente(user);
+        orderModel.setUsuario(user);
         orderModel.setEstado(OrderState.PENDING.getCode());
         orderModel.setIdPedido(order.getId());
         orderModel.setItems(items);
@@ -137,6 +140,7 @@ public class OrderService {
         }
     }
 
+    @Transactional
     public Response getAll(User user){
         Response response = new Response();
 
@@ -159,20 +163,19 @@ public class OrderService {
 
             for(app.entity.order.Order order: orders) {
                 Order orderModel = new Order();
-                // Then get items
-                List<app.entity.order.Item> items = _itemRepository.getByOrderId(order);
 
                 Float total = 0.0f;
-                for(app.entity.order.Item item: items) {
+                for(app.entity.order.Item item: order.getItems()) {
                     total += item.getPrecio();
                 }
 
-                orderModel.setItems(items);
-                orderModel.setCliente(user);
+                orderModel.setItems(order.getItems());
+                orderModel.setUsuario(user);
                 orderModel.setIdPedido(order.getId());
                 orderModel.setTotal(total);
                 orderModel.setPagado(order.getPagado());
                 orderModel.setEstado(order.getStatus());
+                orderModel.setFecha(order.getDate());
 
                 ordersModels.add(orderModel);
             }
@@ -180,12 +183,13 @@ public class OrderService {
             response.data = ordersModels;
             return response;
         }catch (Exception e){
-            System.out.println(e);
+            System.err.println(e);
             response.addError("Ocurrió un error al obtener los pedidos.");
             return response;
         }
     }
 
+    @Transactional
     public Response getById(long id, User user){
         Response response = new Response();
         Order orderModel = new Order();
@@ -204,20 +208,19 @@ public class OrderService {
                 return response;
             }
 
-            // Then get items
-            List<app.entity.order.Item> items = _itemRepository.getByOrderId(order);
-
+            // Then process the items
             Float total = 0.0f;
-            for(app.entity.order.Item item: items) {
+            for(app.entity.order.Item item: order.getItems()) {
                 total += item.getPrecio();
             }
 
-            orderModel.setItems(items);
-            orderModel.setCliente(user);
+            orderModel.setItems(order.getItems());
+            orderModel.setUsuario(user);
             orderModel.setIdPedido(id);
             orderModel.setTotal(total);
             orderModel.setPagado(order.getPagado());
             orderModel.setEstado(order.getStatus());
+            orderModel.setFecha(order.getDate());
 
             // Return model instead of entities
 
@@ -226,6 +229,7 @@ public class OrderService {
             return response;
 
         }catch (Exception e){
+            System.err.println(e);
             response.addError("Ocurrió un problema al buscar el pedido");
             return response;
         }
@@ -243,32 +247,36 @@ public class OrderService {
         }
     }
 
+    @Transactional
     public Response update(Long pedidoId, User user, Order order) {
 
         app.entity.order.Order orderEntity = _orderRepository.getById(pedidoId);
-        orderEntity.setStatus(order.getEstado());
-        orderEntity.setPagado(order.getPagado());
 
-        if(orderEntity.getStatus() == OrderState.CANCELLED.getCode()) {
-            List<app.entity.order.Item> items = _itemRepository.getByOrderId(orderEntity);
-            for(app.entity.order.Item item: items) {
-                Container container = item.getContainer();
-                Beer beer = item.getBeer();
+        if (order.getPagado() != null) {
+            orderEntity.setPagado(order.getPagado());
+        }
 
-                container.setQuantity(container.getQuantity() + item.getCantidad().intValue());
-                beer.setQuantity(beer.getQuantity() + container.getCapacity() * item.getCantidad().intValue());
+        if (order.getEstado() != null) {
+            orderEntity.setStatus(order.getEstado());
+            if(order.getEstado() == OrderState.CANCELLED.getCode() && orderEntity.getStatus() != OrderState.CANCELLED.getCode()) {
+                List<app.entity.order.Item> items = _itemRepository.getByOrderId(orderEntity);
+                for (app.entity.order.Item item : items) {
+                    Container container = item.getContainer();
+                    Beer beer = item.getBeer();
 
-                _containerRepository.save(container);
-                _beerRepository.save(beer);
+                    container.setQuantity(container.getQuantity() + item.getCantidad().intValue());
+                    beer.setQuantity(beer.getQuantity() + container.getCapacity() * item.getCantidad().intValue());
 
+                    _containerRepository.update(container);
+                    _beerRepository.update(beer);
+                }
             }
         }
 
-        orderEntity = _orderRepository.save(orderEntity);
+        _orderRepository.update(orderEntity);
 
         Response response = new Response();
         response.addSuccess("Pedido modificado con éxito.");
-        response.data = orderEntity;
         return response;
     }
 }

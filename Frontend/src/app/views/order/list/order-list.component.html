@@ -15,6 +15,7 @@
             <table class="table table-striped full-width" id="order-table">
                 <thead>
                     <tr>
+                        <th class='text-center' *ngIf="roleId == 1">Cliente</th>
                         <th class='text-center'>Fecha de Ingreso</th>
                         <th class='text-center'># Pedido</th>
                         <th class='text-center'># Items</th>
@@ -25,11 +26,12 @@
                 </thead>
                 <tbody *ngIf="orders$|async as orders">
                     <tr *ngFor="let order of orders" class="pointer">
-                        <td class='text-center'>{{ order.fecha }}</td>
+                        <td class='text-center' *ngIf="roleId == 1">{{ order.usuario.client.businessName }} - {{ order.usuario.client.cuit }}</td>
+                        <td class='text-center'>{{ order.fecha | date: 'mediumDate' }}</td>
                         <td class='text-center'>{{ order.idPedido }}</td>
                         <td class='text-center'>{{ order.items.length }}</td>
-                        <td class='text-center'>$ {{ orders.total  | number: '1.2-2' }} - {{ orders.pagado ? '✓': '✗' }}</td>
-                        <td class='text-center'>{{ orders.estadoVisible }}</td>
+                        <td class='text-center'>$ {{ order.total | number: '1.2-2' }} - {{ order.pagado ? '✓': '✗' }}</td>
+                        <td class='text-center'>{{ estadoVisible(order.estado) }}</td>
                         <td class='text-center'>
                             <button class="btn btn-xs btn-primary" (click)="goToDetail(order.idPedido)" title="Editar">
                                 <i class="fa fa-pencil fa-lg"></i>

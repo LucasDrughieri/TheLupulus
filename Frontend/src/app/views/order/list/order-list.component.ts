@@ -12,7 +12,7 @@ import { OrderService } from '../../../core/services/order.service';
     templateUrl: './order-list.component.html'    
 })
 export class OrderListComponent implements OnInit {
-    public orders$: Observable<Order[]> = new Observable();
+    public orders$: Observable<Order[]>;
 
     public roleId: number = 1;
 
@@ -32,13 +32,14 @@ export class OrderListComponent implements OnInit {
 
         this.messageService.showLoading();
         this.subscriptions.push(
-            this.orders$.subscribe(response => this.messageService.closeLoading(), error => {
-                this.messageService.closeLoading()
+            this.orders$.subscribe(response => {
+                this.messageService.closeLoading();
+                this.initializeDataTable();
+            }, error => {
+                this.messageService.closeLoading();
                 this.messageService.showError('Ocurrió un error al intentar cargar la información de Pedidos. Reintente mas tarde.');
             })
         );
-
-        this.initializeDataTable();
     }
 
     ngOnDestroy(): void {
@@ -54,5 +55,14 @@ export class OrderListComponent implements OnInit {
 
     goToDetail(id){
         this.router.navigate([`/Pedidos/${id}`]);
+    }
+
+    private estadoVisible(estado: number): string {
+        switch(estado) {
+            case 0: return "Finalizado"
+            case 1: return "Pendiente"
+            case 2: return "En preparación"
+            case 3: return "Cancelado"
+        }
     }
 }

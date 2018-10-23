@@ -41,7 +41,7 @@ public class InitialConfiguration {
         Client client = _clientRepository.getById(1);
 
         User user = new User();
-        user.setClientId(client);
+        user.setClient(client);
         user.setNickname("cebada");
         user.setPassword("cebada");
         user.setRole(2);
