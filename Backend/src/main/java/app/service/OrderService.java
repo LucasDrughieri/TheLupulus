@@ -172,7 +172,7 @@ public class OrderService {
             // First get order
             app.entity.order.Order order = _orderRepository.getById(id);
 
-            if(order.getUser().getId() != user.getId() || user.getRole() != UserRole.ADMINISTRATOR.getCode()) {
+            if(order.getUser().getId() != user.getId() && user.getRole() != UserRole.ADMINISTRATOR.getCode()) {
                 response.addError("Pedido no encontrado");
                 return response;
             }
