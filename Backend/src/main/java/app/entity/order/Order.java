@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-@Entity
+@Entity(name = "orders")
 @Table(name = "orders")
 public class Order {
 

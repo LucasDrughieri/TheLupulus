@@ -158,6 +158,7 @@ public class OrderService {
             response.data = orders;
             return response;
         }catch (Exception e){
+            System.out.println(e);
             response.addError("Ocurrió un error al obtener los pedidos.");
             return response;
         }
