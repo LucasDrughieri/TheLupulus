@@ -1,8 +1,10 @@
 package app.repository;
 
 import app.entity.user.User;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -39,7 +41,11 @@ public class UserRepository {
     }
 
     public User getByNickname(String nickname) {
-        return (User) getSession().get(User.class, nickname);
+        Criteria criteria = getSession().createCriteria(User.class);
+        User user = (User) criteria.add(Restrictions.eq("nickname", nickname))
+                .uniqueResult();
+
+        return user;
     }
 
     public boolean exists(long id){
