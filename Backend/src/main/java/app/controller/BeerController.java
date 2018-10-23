@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
+
 @Controller
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
@@ -80,7 +82,7 @@ public class BeerController {
 
     @GetMapping(value = "/beer/name/{name}")
     @ResponseBody
-    public ResponseEntity<Response> getByName(@RequestParam("name") String name){
+    public ResponseEntity<Response> getByName(@PathVariable("name") String name){
         Response response = _service.getByName(name);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
