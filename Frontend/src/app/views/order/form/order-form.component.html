@@ -1,39 +1,26 @@
-<div class="row">
-    <div class="col-sm-2">
-        <strong>Cantidad</strong>
-    </div>
-    <div class="col-sm-3">
-        <strong>Cerveza</strong>
-    </div>
-    <div class="col-sm-3">
-        <strong>Contenedor</strong>
-    </div>
-    <div class="col-sm-3 text-center">
-        <strong>Precio</strong>
-    </div>
-    <div class="col-sm-1">
-    </div>
-</div>
-
 <div class="row" *ngFor="let item of model.items">
     <div class="col-sm-2">
         <div class="form-group">
+            <strong>Cantidad</strong>
             <input type="number" class="form-control" [(ngModel)]="item.cantidad" min="0">
         </div>
     </div>
     <div class="col-sm-3">
+        <strong>Cerveza</strong>
         <select class="form-control" [(ngModel)]="item.cerveza" *ngIf="beers$|async as beers; else loading">
             <option value="">Seleccione una opción</option>
             <option [ngValue]="beer" *ngFor="let beer of beers">{{ beer.name }}</option>
         </select>
     </div>
     <div class="col-sm-3">
+        <strong>Contenedor</strong>
         <select class="form-control" [(ngModel)]="item.contenedor" *ngIf="containers$|async as containers; else loading">
             <option value="">Seleccione una opción</option>
             <option [ngValue]="container" *ngFor="let container of containers">{{ container.name }}</option>
         </select>
     </div>
     <div class="col-sm-3 text-center">
+        <strong>Precio</strong>
         <p *ngIf="item.cantidad >= 0 && (item.cantidad % 1 == 0) && item.cerveza && item.contenedor; else select">
             $ {{ item.cerveza.pricePerLitre * item.contenedor.capacity | number: '1.2-2' }} c/u - <strong>$ {{ item.cantidad * item.cerveza.pricePerLitre * item.contenedor.capacity | number: '1.2-2' }}</strong>
         </p>

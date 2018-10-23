@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
-import { forkJoin } from 'rxjs/index';
 import { Order, Item } from '../../../models/order';
 import { ContainerService } from '../../../core/services/container.service';
 import { BeerService } from '../../../core/services/beer.service';
 import { MessageService } from '../../../core/services/message.service';
+import { forkJoin } from 'rxjs/observable/forkJoin';
 
 @Component({    
     selector: 'order-form',
