@@ -155,7 +155,29 @@ public class OrderService {
                 return response;
             }
 
-            response.data = orders;
+            List<Order> ordersModels = new ArrayList<>();
+
+            for(app.entity.order.Order order: orders) {
+                Order orderModel = new Order();
+                // Then get items
+                List<app.entity.order.Item> items = _itemRepository.getByOrderId(order);
+
+                Float total = 0.0f;
+                for(app.entity.order.Item item: items) {
+                    total += item.getPrecio();
+                }
+
+                orderModel.setItems(items);
+                orderModel.setCliente(user);
+                orderModel.setIdPedido(order.getId());
+                orderModel.setTotal(total);
+                orderModel.setPagado(order.getPagado());
+                orderModel.setEstado(order.getStatus());
+
+                ordersModels.add(orderModel);
+            }
+
+            response.data = ordersModels;
             return response;
         }catch (Exception e){
             System.out.println(e);
