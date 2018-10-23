@@ -31,6 +31,10 @@ import { ClientFormComponent } from "./client/form/client-form.component";
 import { ClientListComponent } from "./client/list/client-list.component";
 import { ClientEditComponent } from "./client/edit/client-edit.component";
 import { StockComponent } from "./stock/stock.component";
+import { OrderAddComponent } from "./order/add/order-add.component";
+import { OrderFormComponent } from "./order/form/order-form.component";
+import { OrderListComponent } from "./order/list/order-list.component";
+import { OrderDetailsComponent } from "./order/details/order-details.component";
 
 @NgModule({
     declarations: [
@@ -52,7 +56,11 @@ import { StockComponent } from "./stock/stock.component";
         ClientFormComponent,
         ClientListComponent,
         ClientEditComponent,
-        StockComponent
+        StockComponent,
+        OrderAddComponent,
+        OrderFormComponent,
+        OrderListComponent,
+        OrderDetailsComponent,
     ],
     providers: [
         BaseService,
