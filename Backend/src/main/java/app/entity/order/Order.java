@@ -1,11 +1,14 @@
 package app.entity.order;
 
 import app.entity.user.User;
+import app.entity.order.Item;
 import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity(name = "orders")
@@ -31,4 +34,6 @@ public class Order {
 
     private Boolean pagado;
 
+    @OneToMany(mappedBy = "order")
+    private List<Item> items;
 }

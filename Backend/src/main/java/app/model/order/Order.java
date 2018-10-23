@@ -12,9 +12,10 @@ import java.util.List;
 @Data
 public class Order {
     Long idPedido;
-    User cliente;
+    User usuario;
     Integer estado;
     Boolean pagado;
     List<Item> items;
     Float total;
+    Date fecha;
 }

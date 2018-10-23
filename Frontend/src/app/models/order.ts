@@ -15,24 +15,6 @@ export class Order {
         this.items = new Array();
     }
 
-    estadoVisible(estado): string {
-        switch(estado || this.estado) {
-            case 0: return "Finalizado"
-            case 1: return "Pendiente"
-            case 2: return "En preparación"
-            case 3: return "Cancelado"
-        }
-    }
-
-    transicionesPosibles(): number[] {
-        switch(this.estado) {
-            case 0: return []
-            case 1: return [0, 2, 3]
-            case 2: return [0, 3]
-            case 3: return []
-        }
-    }
-
     controlStock(): Object {
         var cervezas = this.items.map(v => v.cerveza);
         var contenedores = this.items.map(v => v.contenedor);

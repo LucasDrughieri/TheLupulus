@@ -14,12 +14,17 @@ export class OrderDetailsComponent implements OnInit {
     private subscriptions: any[] = new Array();
     private order$: Observable<Order>;
 
+    public roleId: number = 1;
+
     constructor(private orderService: OrderService,
                 private messageService: MessageService,
                 private router: Router,
                 private activateRoute: ActivatedRoute) { }
 
     ngOnInit(): void {
+        var user = JSON.parse(localStorage.getItem('user'));
+        this.roleId = user.userId.role;
+
         const routeParams = this.activateRoute.snapshot.params;
 
         if (!routeParams.id) {
@@ -49,11 +54,11 @@ export class OrderDetailsComponent implements OnInit {
         );
     }
 
-    transitionTo(estado) {
+    transitionTo(id, estado) {
         this.messageService.showLoading();
 
         this.subscriptions.push(
-            this.orderService.patch({ status: estado }).subscribe(response => {
+            this.orderService.patch(id, { estado: estado }).subscribe(response => {
                 this.messageService.closeLoading();
                 this.router.navigate(["/Pedidos"]);
             }, 
@@ -64,11 +69,11 @@ export class OrderDetailsComponent implements OnInit {
         );
     }
 
-    trackPayment() {
+    trackPayment(id, newValue) {
         this.messageService.showLoading();
 
         this.subscriptions.push(
-            this.orderService.patch({ pagado: true }).subscribe(response => {
+            this.orderService.patch(id, { pagado: newValue }).subscribe(response => {
                 this.messageService.closeLoading();
                 this.router.navigate(["/Pedidos"]);
             }, 
@@ -77,5 +82,23 @@ export class OrderDetailsComponent implements OnInit {
                 this.messageService.showError('Ocurrió un error al intentar guardar los cambios del Pedido. Reintente mas tarde.');
             })
         );
+    }
+    
+    private estadoVisible(estado: number): string {
+        switch(estado) {
+            case 0: return "Finalizado"
+            case 1: return "Pendiente"
+            case 2: return "En preparación"
+            case 3: return "Cancelado"
+        }
+    }
+
+    private transicionesPosibles(estado: number): number[] {
+        switch(estado) {
+            case 0: return []
+            case 1: return [0, 2, 3]
+            case 2: return [0, 3]
+            case 3: return []
+        }
     }
 }

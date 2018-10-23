@@ -6,19 +6,15 @@
                     <h3>Pedido # {{ order.idPedido }}</h3>
                 </div>
                 <div class="ibox-content">
-                    <p><strong>Fecha Ingreso:</strong> {{ order.fecha }}</p>
-                    <p><strong>Total:</strong> $ {{ orders.total  | number: '1.2-2' }}</p>
-                    <p><strong>Pago:</strong> {{ orders.pagado ? '✓ Registrado': '✗ No Registrado' }}</p>
-                    <p><strong>Estado:</strong> {{ orders.estadoVisible }}</p>
+                    <p><strong>Fecha Ingreso:</strong>{{ order.fecha | date: 'medium' }}</p>
+                    <p><strong>Total:</strong> $ {{ order.total  | number: '1.2-2' }}</p>
+                    <p><strong>Pago:</strong> {{ order.pagado ? '✓ Registrado': '✗ No Registrado' }} <button (click)="trackPayment(order.idPedido, true)" *ngIf="!order.pagado && order.estado != 3 && roleId == 2">Registrar Pago</button> <button (click)="trackPayment(order.idPedido, false)" *ngIf="order.pagado && order.estado == 3 && roleId == 2">Registrar Reembolso</button></p>
+                    <p><strong>Estado:</strong> {{ estadoVisible(order.estado) }}</p>
                 </div>
 
-                <div class="ibox-content" *ngIf="true"> <!-- if admin -->
+                <div class="ibox-content" *ngIf="transicionesPosibles(order.estado).length > 0 && roleId == 2">
                     <strong>Transicionar a estado:</strong> 
-                    <button *ngFor="let estado of order.transicionesPosibles" (click)="transitionTo(estado)">{{ order.estadoVisible(estado) }}</button>
-                </div>
-
-                <div class="ibox-content" *ngIf="true && !order.pagado"> <!-- if admin -->
-                    <button (click)="trackPayment()">Registrar Pago</button>
+                    <button *ngFor="let estado of transicionesPosibles(order.estado)" (click)="transitionTo(order.idPedido, estado)">{{ estadoVisible(estado) }}</button>
                 </div>
 
                 <table class="table table-striped full-width">
@@ -33,9 +29,9 @@
                     <tbody>
                         <tr *ngFor="let item of order.items" class="pointer">
                             <td class='text-center'>{{ item.cantidad }}</td>
-                            <td class='text-center'>{{ item.cerveza.name }}</td>
-                            <td class='text-center'>{{ item.contenedor.name }}</td>
-                            <td class='text-center'>{{ item.cerveza.precio | number: '1.2-2' }}</td>
+                            <td class='text-center'>{{ item.beer.name }}</td>
+                            <td class='text-center'>{{ item.container.name }}</td>
+                            <td class='text-center'>$ {{ item.precio | number: '1.2-2' }}</td>
                         </tr>
                     </tbody>
                     <!-- tfoot>

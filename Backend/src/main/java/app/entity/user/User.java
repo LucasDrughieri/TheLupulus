@@ -2,6 +2,7 @@ package app.entity.user;
 
 import app.entity.Client;
 import app.model.user.UserModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -15,10 +16,11 @@ public class User {
 
     @OneToOne
     @JoinColumn(name="client_id")
-    private Client clientId;
+    private Client client;
 
     private String nickname;
 
+    @JsonIgnore
     private String password;
 
     private Integer role;
@@ -31,12 +33,12 @@ public class User {
         this.id = id;
     }
 
-    public Client getClientId() {
-        return clientId;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(Client clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public String getNickname() {
@@ -68,8 +70,8 @@ public class User {
 
         model.setId(id);
 
-        if(clientId != null){
-            model.setClientId(clientId.getId());
+        if(client != null){
+            model.setClientId(client.getId());
         }
         else{
             model.setClientId(new Long(0));

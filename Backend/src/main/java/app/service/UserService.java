@@ -43,7 +43,7 @@ public class UserService {
         User user = new User();
 
         if (model.getRole() == 2 && model.getClientId() != null){
-            user.setClientId(clientRepository.getById(model.getClientId()));
+            user.setClient(clientRepository.getById(model.getClientId()));
         }
 
         user.setNickname(model.getNickname());

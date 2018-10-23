@@ -22,7 +22,7 @@ export class OrderService {
         return this.http.post<any>(`${this.config.getBaseUrl()}${this.CONTROLLER}`, model, { headers: this.config.getHeaders() });
     }
 
-    public patch(model) {
-        return this.http.patch<any>(`${this.config.getBaseUrl()}${this.CONTROLLER}`, model, { headers: this.config.getHeaders() });
+    public patch(id, model) {
+        return this.http.patch<any>(`${this.config.getBaseUrl()}${this.CONTROLLER}/${id}`, model, { headers: this.config.getHeaders() });
     }
 }
