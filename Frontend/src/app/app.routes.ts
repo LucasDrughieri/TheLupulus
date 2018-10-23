@@ -16,6 +16,9 @@ import { ClientListComponent } from "./views/client/list/client-list.component";
 import { ClientAddComponent } from "./views/client/add/client-add.component";
 import { ClientEditComponent } from "./views/client/edit/client-edit.component";
 import { StockComponent } from "./views/stock/stock.component";
+import { OrderAddComponent } from "./views/order/add/order-add.component"
+import { OrderListComponent } from "./views/order/list/order-list.component"
+import { OrderDetailsComponent } from "./views/order/details/order-details.component"
 
 export const ROUTES: Routes = [
     // Main redirect
@@ -75,6 +78,15 @@ export const ROUTES: Routes = [
             { path: '', component: ClientListComponent },
             { path: 'Alta', component: ClientAddComponent },
             { path: ':id/Editar', component: ClientEditComponent }
+        ]
+    },
+
+    {
+        path: 'Pedidos', component: BasicLayoutComponent,
+        children: [
+            { path: '', component: OrderListComponent },
+            { path: 'Alta', component: OrderAddComponent },
+            { path: ':id', component: OrderDetailsComponent }
         ]
     },
     

@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-sm-2">
+        <strong>Cantidad</strong>
+    </div>
+    <div class="col-sm-3">
+        <strong>Cerveza</strong>
+    </div>
+    <div class="col-sm-3">
+        <strong>Contenedor</strong>
+    </div>
+    <div class="col-sm-3 text-center">
+        <strong>Precio</strong>
+    </div>
+    <div class="col-sm-1">
+    </div>
+</div>
+
+<div class="row" *ngFor="let item of model.items">
+    <div class="col-sm-2">
+        <div class="form-group">
+            <input type="number" class="form-control" [(ngModel)]="item.cantidad" min="0">
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <select class="form-control" [(ngModel)]="item.cerveza" *ngIf="beers$|async as beers; else loading">
+            <option value="">Seleccione una opción</option>
+            <option [ngValue]="beer" *ngFor="let beer of beers">{{ beer.name }}</option>
+        </select>
+    </div>
+    <div class="col-sm-3">
+        <select class="form-control" [(ngModel)]="item.contenedor" *ngIf="containers$|async as containers; else loading">
+            <option value="">Seleccione una opción</option>
+            <option [ngValue]="container" *ngFor="let container of containers">{{ container.name }}</option>
+        </select>
+    </div>
+    <div class="col-sm-3 text-center">
+        <p *ngIf="item.cantidad >= 0 && (item.cantidad % 1 == 0) && item.cerveza && item.contenedor; else select">
+            $ {{ item.cerveza.pricePerLitre * item.contenedor.capacity | number: '1.2-2' }} c/u - <strong>$ {{ item.cantidad * item.cerveza.pricePerLitre * item.contenedor.capacity | number: '1.2-2' }}</strong>
+        </p>
+    </div>
+    <div class="col-sm-1">
+        <button type="button" class="btn btn-danger" (click)="removeItem(item)" [disabled]="model.items.length <= 1">✖</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        
+    </div>
+    <div class="col-sm-2 text-right">
+        <strong>Total:</strong>
+    </div>
+    <div class="col-sm-3 text-center">
+        $ {{ getTotal() | number: '1.2-2' }}
+    </div>
+    <div class="col-sm-1">
+        <button type="button" class="btn btn-info" (click)="addItem()">+</button>
+    </div>
+</div>
+<div class="row">
+    
+</div>
+
+<ng-template #loading>
+    <select class="form-control" disabled>
+        <option>...</option>
+    </select>
+</ng-template>
+
+<ng-template #select>
+    <p>...</p>
+</ng-template>

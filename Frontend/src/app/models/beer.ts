@@ -1,5 +1,5 @@
 export class Beer {
-    id: number;
+    beerId: number;
     name: string;
     granos: string;
     density: number;
