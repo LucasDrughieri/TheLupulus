@@ -226,6 +226,21 @@ public class OrderService {
         orderEntity.setStatus(order.getEstado());
         orderEntity.setPagado(order.getPagado());
 
+        if(orderEntity.getStatus() == OrderState.CANCELLED.getCode()) {
+            List<app.entity.order.Item> items = _itemRepository.getByOrderId(orderEntity);
+            for(app.entity.order.Item item: items) {
+                Container container = item.getContainer();
+                Beer beer = item.getBeer();
+
+                container.setQuantity(container.getQuantity() + item.getCantidad().intValue());
+                beer.setQuantity(beer.getQuantity() + container.getCapacity() * item.getCantidad().intValue());
+
+                _containerRepository.save(container);
+                _beerRepository.save(beer);
+
+            }
+        }
+
         orderEntity = _orderRepository.save(orderEntity);
 
         Response response = new Response();
