@@ -14,7 +14,8 @@ export class Configuration {
     public getHeaders() {
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Access-Control-Allow-Origin': '*',
+            'X-AuthToken': '254b5bf6-2aee-4527-8b82-b270f2c93e9a'
         });
 
         return headers;
