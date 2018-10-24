@@ -10,6 +10,6 @@ export class LoginService {
     }
 
     public login(model) {
-        return this.http.post<any>(`${this.config.getBaseUrl()}session/create/`, model, { headers: this.config.getHeaders() });
+        return this.http.post<any>(`${this.config.getBaseUrl()}session/create/`, model, { headers: this.config.getLoginHeaders() });
     }
 }

@@ -14,6 +14,8 @@ import { OrderService } from '../../../core/services/order.service';
 export class OrderListComponent implements OnInit {
     public orders$: Observable<Order[]> = new Observable();
 
+    public roleId: number = 1;
+
     private subscriptions: any[] = new Array();
 
     constructor(
@@ -23,6 +25,9 @@ export class OrderListComponent implements OnInit {
         private dataTableService: DataTableService) { }
 
     ngOnInit(): void {
+        var user = JSON.parse(localStorage.getItem('user'));
+        this.roleId = user.userId.role;
+
         this.orders$ = this.orderService.getAll().map(v => v.data).pipe(shareReplay(1));
 
         this.messageService.showLoading();

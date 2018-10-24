@@ -11,10 +11,17 @@ declare var jQuery: any;
 
 export class NavigationComponent implements OnInit, OnDestroy {
 
+  public roleId: number = 2;
+
   constructor(private router: Router) {
   }
 
   ngOnInit(): void {
+    var user = JSON.parse(localStorage.getItem('user'));
+
+    if(user){
+      this.roleId = user.userId.role;
+    }
   }
 
   ngOnDestroy() {

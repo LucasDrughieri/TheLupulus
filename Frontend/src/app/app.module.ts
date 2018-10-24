@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { ViewsModule } from './views/views.module';
 import { LayoutsModule } from './components/common/layouts/layouts.module';
+import { AuthGuard } from './guards/auth.guard';
 
 const SELECT_CONFIG = {
   provide: NG_SELECT_DEFAULT_CONFIG,
@@ -43,7 +44,8 @@ const SELECT_CONFIG = {
   ],
   providers: [
     { provide: LocationStrategy, useClass: PathLocationStrategy },
-    SELECT_CONFIG,
+    SELECT_CONFIG,,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

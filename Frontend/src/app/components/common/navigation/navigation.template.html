@@ -11,35 +11,35 @@
       </li>
 
       <!--ADMIN-->
-      <li [ngClass]="{active: activeRoute('Clientes')}">
+      <li [ngClass]="{active: activeRoute('Clientes')}" *ngIf="roleId == 1">
         <a class="text-left" [routerLink]="['/Clientes']">
           <i class="fa fa-users"></i>
           <span class="nav-label">Clientes</span>
         </a>
       </li>
 
-      <li [ngClass]="{active: activeRoute('Usuarios')}">
+      <li [ngClass]="{active: activeRoute('Usuarios')}" *ngIf="roleId == 1">
         <a class="text-left" [routerLink]="['/Usuarios']">
           <i class="fa fa-users"></i>
           <span class="nav-label">Usuarios</span>
         </a>
       </li>
       
-      <li [ngClass]="{active: activeRoute('Contenedores')}">
+      <li [ngClass]="{active: activeRoute('Contenedores')}" *ngIf="roleId == 1">
         <a class="text-left" [routerLink]="['/Contenedores']">
           <i class="fa fa-archive"></i>
           <span class="nav-label">Contenedores</span>
         </a>
       </li>
 
-      <li [ngClass]="{active: activeRoute('Cervezas')}">
+      <li [ngClass]="{active: activeRoute('Cervezas')}" *ngIf="roleId == 1">
         <a class="text-left" [routerLink]="['/Cervezas']">
           <i class="fa fa-beer"></i>
           <span class="nav-label">Cervezas</span>
         </a>
       </li>
 
-      <li [ngClass]="{active: activeRoute('Stock')}">
+      <li [ngClass]="{active: activeRoute('Stock')}" *ngIf="roleId == 1">
         <a class="text-left" [routerLink]="['/Stock']">
           <i class="fa fa-book"></i>
           <span class="nav-label">Stock</span>

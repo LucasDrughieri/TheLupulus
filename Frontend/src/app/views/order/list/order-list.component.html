@@ -4,7 +4,7 @@
             <h3 class="pull-left">
                 <strong>Listado de Pedidos</strong>
             </h3>
-            <div class="ibox-tools">
+            <div class="ibox-tools" *ngIf="roleId == 2">
                 <a [routerLink]="['/Pedidos/Alta']" class="btn btn-sm btn-primary">
                     Nuevo
                     <i class="fa fa-plus"></i>

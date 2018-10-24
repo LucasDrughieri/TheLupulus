@@ -19,6 +19,8 @@ import { StockComponent } from "./views/stock/stock.component";
 import { OrderAddComponent } from "./views/order/add/order-add.component"
 import { OrderListComponent } from "./views/order/list/order-list.component"
 import { OrderDetailsComponent } from "./views/order/details/order-details.component"
+import { AuthGuard } from "./guards/auth.guard";
+import { ForbiddenComponent } from "./views/errors/403/403.component";
 
 export const ROUTES: Routes = [
     // Main redirect
@@ -32,61 +34,68 @@ export const ROUTES: Routes = [
     },
 
     {
-        path: '', component: BasicLayoutComponent,
+        path: '', component: BlankLayoutComponent,
         children: [
-            { path: 'Home', component: HomeComponent },
+            { path: '403', component: ForbiddenComponent },
         ]
     },
 
     {
         path: '', component: BasicLayoutComponent,
         children: [
-            { path: 'Stock', component: StockComponent },
+            { path: 'Home', component: HomeComponent, canActivate: [AuthGuard], data: { roleId: [1] } },
+        ]
+    },
+
+    {
+        path: '', component: BasicLayoutComponent,
+        children: [
+            { path: 'Stock', component: StockComponent, canActivate: [AuthGuard], data: { roleId: [1] }},
         ]
     },
 
     {
         path: 'Contenedores', component: BasicLayoutComponent,
         children: [
-            { path: '', component: ContainerListComponent },
-            { path: 'Alta', component: ContainerAddComponent },
-            { path: ':id/Editar', component: ContainerEditComponent }
+            { path: '', component: ContainerListComponent, canActivate: [AuthGuard], data: { roleId: [1] } },
+            { path: 'Alta', component: ContainerAddComponent, canActivate: [AuthGuard], data: { roleId: [1] } },
+            { path: ':id/Editar', component: ContainerEditComponent, canActivate: [AuthGuard], data: { roleId: [1] } }
         ]
     },
 
     {
         path: 'Cervezas', component: BasicLayoutComponent,
         children: [
-            { path: '', component: BeerListComponent },
-            { path: 'Alta', component: BeerAddComponent },
-            { path: ':id/Editar', component: BeerEditComponent }
+            { path: '', component: BeerListComponent, canActivate: [AuthGuard], data: { roleId: [1] } },
+            { path: 'Alta', component: BeerAddComponent, canActivate: [AuthGuard], data: { roleId: [1] } },
+            { path: ':id/Editar', component: BeerEditComponent, canActivate: [AuthGuard], data: { roleId: [1] } }
         ]
     },
 
     {
         path: 'Usuarios', component: BasicLayoutComponent,
         children: [
-            { path: '', component: UserListComponent },
-            { path: 'Alta', component: UserAddComponent },
-            { path: ':id/Editar', component: UserEditComponent }
+            { path: '', component: UserListComponent, canActivate: [AuthGuard], data: { roleId: [1] } },
+            { path: 'Alta', component: UserAddComponent, canActivate: [AuthGuard], data: { roleId: [1] } },
+            { path: ':id/Editar', component: UserEditComponent, canActivate: [AuthGuard], data: { roleId: [1] } }
         ]
     },
 
     {
         path: 'Clientes', component: BasicLayoutComponent,
         children: [
-            { path: '', component: ClientListComponent },
-            { path: 'Alta', component: ClientAddComponent },
-            { path: ':id/Editar', component: ClientEditComponent }
+            { path: '', component: ClientListComponent, canActivate: [AuthGuard], data: { roleId: [1] } },
+            { path: 'Alta', component: ClientAddComponent, canActivate: [AuthGuard], data: { roleId: [1] } },
+            { path: ':id/Editar', component: ClientEditComponent, canActivate: [AuthGuard], data: { roleId: [1] } }
         ]
     },
 
     {
         path: 'Pedidos', component: BasicLayoutComponent,
         children: [
-            { path: '', component: OrderListComponent },
-            { path: 'Alta', component: OrderAddComponent },
-            { path: ':id', component: OrderDetailsComponent }
+            { path: '', component: OrderListComponent, canActivate: [AuthGuard], data: { roleId: [1,2] } },
+            { path: 'Alta', component: OrderAddComponent, canActivate: [AuthGuard], data: { roleId: [2] } },
+            { path: ':id', component: OrderDetailsComponent, canActivate: [AuthGuard], data: { roleId: [1,2] } }
         ]
     },
     

@@ -16,7 +16,6 @@ export class TopNavbarComponent {
 
   constructor(
     public configService: Configuration,
-    // private authService: AuthenticationService,
     private router: Router) {
 
     this.userName = Cookie.get("username");
@@ -33,7 +32,7 @@ export class TopNavbarComponent {
   }
 
   logout() {
-    // this.authService.logout();
+    localStorage.clear();
     this.router.navigate(['/Login']);
   }
 }

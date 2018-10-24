@@ -35,6 +35,7 @@ import { OrderAddComponent } from "./order/add/order-add.component";
 import { OrderFormComponent } from "./order/form/order-form.component";
 import { OrderListComponent } from "./order/list/order-list.component";
 import { OrderDetailsComponent } from "./order/details/order-details.component";
+import { ForbiddenComponent } from "./errors/403/403.component";
 
 @NgModule({
     declarations: [
@@ -61,6 +62,7 @@ import { OrderDetailsComponent } from "./order/details/order-details.component";
         OrderFormComponent,
         OrderListComponent,
         OrderDetailsComponent,
+        ForbiddenComponent
     ],
     providers: [
         BaseService,
