@@ -1,8 +1,12 @@
 package app.controller;
 
+import app.entity.UserSession;
+import app.entity.user.User;
+import app.entity.user.UserRole;
 import app.infraestructure.Response;
 import app.model.ClientModel;
 import app.model.user.UserModel;
+import app.repository.UserSessionRepository;
 import app.service.ClientService;
 import app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +23,21 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    UserSessionRepository _userSessionRepository;
+
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<Response> createUser(@RequestBody UserModel newUser){
-        Response response = userService.createUser(newUser);
+    public ResponseEntity<Response> createUser(@RequestBody UserModel newUser, @RequestHeader(value = "Authorization") String sessionToken){
+        Response response = new Response();
+
+        UserSession session = _userSessionRepository.getByToken(sessionToken);
+        User user = session.getUserId();
+
+        if (user != null && user.getRole().equals(UserRole.ADMINISTRATOR.getCode())) {
+            response = userService.createUser(newUser);
+        } else response.addError("El usuario no es administrador");
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
@@ -32,8 +46,16 @@ public class UserController {
 
     @DeleteMapping(value = "/{user}")
     @ResponseBody
-    public ResponseEntity<Response> deleteUser(@PathVariable("user") long userId){
-        Response response = userService.deleteUser(userId);
+    public ResponseEntity<Response> deleteUser(@PathVariable("user") long userId, @RequestHeader(value = "Authorization") String sessionToken){
+
+        Response response = new Response();
+
+        UserSession session = _userSessionRepository.getByToken(sessionToken);
+        User user = session.getUserId();
+
+        if (user != null && user.getRole().equals(UserRole.ADMINISTRATOR.getCode())) {
+            response = userService.deleteUser(userId);
+        } else response.addError("El usuario no es administrador");
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
@@ -42,8 +64,16 @@ public class UserController {
 
     @GetMapping
     @ResponseBody
-    public ResponseEntity<Response> getUsers(){
-        Response response = userService.getAllUsers();
+    public ResponseEntity<Response> getUsers(@RequestHeader(value = "Authorization") String sessionToken){
+
+        Response response = new Response();
+
+        UserSession session = _userSessionRepository.getByToken(sessionToken);
+        User user = session.getUserId();
+
+        if (user != null && user.getRole().equals(UserRole.ADMINISTRATOR.getCode())) {
+            response = userService.getAllUsers();
+        } else response.addError("El usuario no es administrador");
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
@@ -52,8 +82,15 @@ public class UserController {
 
     @GetMapping(value = "/{user}")
     @ResponseBody
-    public ResponseEntity<Response> getById(@PathVariable("user") long userId){
+    public ResponseEntity<Response> getById(@PathVariable("user") long userId, @RequestHeader(value = "Authorization") String sessionToken){
         Response response = userService.getById(userId);
+
+        UserSession session = _userSessionRepository.getByToken(sessionToken);
+        User user = session.getUserId();
+
+        if (user != null && user.getRole().equals(UserRole.ADMINISTRATOR.getCode())) {
+            response = userService.getById(userId);
+        } else response.addError("El usuario no es administrador");
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
