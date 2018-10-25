@@ -63,7 +63,7 @@ public class ClientService {
         }
     }
 
-    public Response getById(long id){
+    public Response getClientById(long id){
         Response response = new Response();
         try {
             Client client = clientRepository.getById(id);

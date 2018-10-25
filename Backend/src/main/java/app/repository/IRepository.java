@@ -6,7 +6,7 @@ public interface IRepository<T> {
     void delete(T item);
     /*
     void update(T item);
-    void getById(T item);
+    void getClientById(T item);
     void getAll(T item);
     */
 }

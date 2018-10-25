@@ -20,7 +20,7 @@ public class ContainerController {
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<Response> post(@RequestBody ContainerModel model){
+    public ResponseEntity<Response> post(@RequestBody ContainerModel model,@RequestHeader(value = "Authorization") String sessionToken){
         Response response = containerService.create(model);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -30,7 +30,7 @@ public class ContainerController {
 
     @DeleteMapping(value = "{container}")
     @ResponseBody
-    public ResponseEntity<Response> delete(@PathVariable("container") long containerId){
+    public ResponseEntity<Response> delete(@PathVariable("container") long containerId, @RequestHeader(value = "Authorization") String sessionToken){
         Response response = containerService.delete(containerId);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -40,7 +40,7 @@ public class ContainerController {
 
     @PutMapping
     @ResponseBody
-    public ResponseEntity<Response> put(@RequestBody ContainerModel model){
+    public ResponseEntity<Response> put(@RequestBody ContainerModel model,@RequestHeader(value = "Authorization") String sessionToken){
         Response response = containerService.update(model);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -50,7 +50,7 @@ public class ContainerController {
 
     @PutMapping(value = "/stock")
     @ResponseBody
-    public ResponseEntity<Response> stock(@RequestBody ContainerStockModel model){
+    public ResponseEntity<Response> stock(@RequestBody ContainerStockModel model,@RequestHeader(value = "Authorization") String sessionToken){
         Response response = containerService.addStock(model);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -60,7 +60,7 @@ public class ContainerController {
 
     @GetMapping
     @ResponseBody
-    public ResponseEntity<Response> get(){
+    public ResponseEntity<Response> get(@RequestHeader(value = "Authorization") String sessionToken){
         Response response = containerService.getAll();
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -70,7 +70,7 @@ public class ContainerController {
 
     @GetMapping(value = "{container}")
     @ResponseBody
-    public ResponseEntity<Response> getById(@PathVariable("container") long containerId){
+    public ResponseEntity<Response> getById(@PathVariable("container") long containerId, @RequestHeader(value = "Authorization") String sessionToken){
         Response response = containerService.getById(containerId);
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);

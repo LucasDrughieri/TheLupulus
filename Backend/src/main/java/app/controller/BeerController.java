@@ -1,9 +1,16 @@
 package app.controller;
 
+import app.entity.UserSession;
+import app.entity.user.User;
+import app.entity.user.UserRole;
 import app.infraestructure.Response;
 import app.model.BeerModel;
 import app.model.BeerStockModel;
+import app.repository.UserRepository;
+import app.repository.UserSessionRepository;
 import app.service.BeerService;
+import app.service.UserService;
+import app.service.UserSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +27,24 @@ public class BeerController {
     @Autowired
     BeerService _service;
 
+    @Autowired
+    UserSessionRepository _userSessionRepository;
+
+    @Autowired
+    UserRepository _userRepository;
+
     @PostMapping("/beer")
     @ResponseBody
-    public ResponseEntity<Response> post(@RequestBody BeerModel newBeer) {
-        Response<BeerModel> response = _service.create(newBeer);
+    public ResponseEntity<Response> post(@RequestBody BeerModel newBeer,  @RequestHeader(value = "Authorization") String sessionToken) {
+
+        Response response = new Response();
+
+        UserSession session = _userSessionRepository.getByToken(sessionToken);
+        User user = session.getUserId();
+
+        if (user != null && user.getRole().equals(UserRole.ADMINISTRATOR.getCode())) {
+            response = _service.create(newBeer);
+        } else response.addError("El usuario no es administrador");
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
@@ -32,8 +53,17 @@ public class BeerController {
 
     @DeleteMapping(value = "/beer/{beer}")
     @ResponseBody
-    public ResponseEntity<Response> delete(@PathVariable("beer") long beerId){
-        Response response = _service.delete(beerId);
+    public ResponseEntity<Response> delete(@PathVariable("beer") long beerId,  @RequestHeader(value = "Authorization") String sessionToken){
+
+        Response response = new Response();
+
+        UserSession session = _userSessionRepository.getByToken(sessionToken);
+        User user = session.getUserId();
+
+        if (user != null && user.getRole().equals(UserRole.ADMINISTRATOR.getCode())) {
+            response = _service.delete(beerId);
+        } else response.addError("El usuario no es administrador");
+
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
@@ -42,8 +72,16 @@ public class BeerController {
 
     @PutMapping(value = "/beer")
     @ResponseBody
-    public ResponseEntity<Response> put(@RequestBody BeerModel newBeer){
-        Response response = _service.update(newBeer);
+    public ResponseEntity<Response> put(@RequestBody BeerModel newBeer,  @RequestHeader(value = "Authorization") String sessionToken){
+
+        Response response = new Response();
+
+        UserSession session = _userSessionRepository.getByToken(sessionToken);
+        User user = session.getUserId();
+
+        if (user != null && user.getRole().equals(UserRole.ADMINISTRATOR.getCode())) {
+            response = _service.update(newBeer);
+        } else response.addError("El usuario no es administrador");
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
@@ -52,8 +90,16 @@ public class BeerController {
 
     @PutMapping(value = "/beer/stock")
     @ResponseBody
-    public ResponseEntity<Response> stock(@RequestBody BeerStockModel model){
-        Response response = _service.addStock(model);
+    public ResponseEntity<Response> stock(@RequestBody BeerStockModel model,  @RequestHeader(value = "Authorization") String sessionToken){
+
+        Response response = new Response();
+
+        UserSession session = _userSessionRepository.getByToken(sessionToken);
+        User user = session.getUserId();
+
+        if (user != null && user.getRole().equals(UserRole.ADMINISTRATOR.getCode())) {
+            response = _service.addStock(model);
+        } else response.addError("El usuario no es administrador");
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
@@ -62,8 +108,17 @@ public class BeerController {
 
     @GetMapping(value = "/beer")
     @ResponseBody
-    public ResponseEntity<Response> getAll(){
-        Response response = _service.getAll();
+    public ResponseEntity<Response> getAll( @RequestHeader(value = "Authorization") String sessionToken){
+
+        Response response = new Response();
+
+        UserSession session = _userSessionRepository.getByToken(sessionToken);
+        User user = session.getUserId();
+
+        if (user != null && user.getRole().equals(UserRole.ADMINISTRATOR.getCode())) {
+            response =_service.getAll();
+
+        } else response.addError("El usuario no es administrador");
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
@@ -72,8 +127,18 @@ public class BeerController {
 
     @GetMapping(value = "/beer/{beer}")
     @ResponseBody
-    public ResponseEntity<Response> getById(@PathVariable("beer") long idClient){
-        Response response = _service.getById(idClient);
+    public ResponseEntity<Response> getById(@PathVariable("beer") long idClient,  @RequestHeader(value = "Authorization") String sessionToken){
+
+        Response response = new Response();
+
+        UserSession session = _userSessionRepository.getByToken(sessionToken);
+        User user = session.getUserId();
+
+        if (user != null && user.getRole().equals(UserRole.ADMINISTRATOR.getCode())) {
+            response = _service.getById(idClient);
+
+        } else response.addError("El usuario no es administrador");
+
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
@@ -82,8 +147,17 @@ public class BeerController {
 
     @GetMapping(value = "/beer/name/{name}")
     @ResponseBody
-    public ResponseEntity<Response> getByName(@PathVariable("name") String name){
-        Response response = _service.getByName(name);
+    public ResponseEntity<Response> getByName(@PathVariable("name") String name,  @RequestHeader(value = "Authorization") String sessionToken){
+
+        Response response = new Response();
+
+        UserSession session = _userSessionRepository.getByToken(sessionToken);
+        User user = session.getUserId();
+
+        if (user != null && user.getRole().equals(UserRole.ADMINISTRATOR.getCode())) {
+            response = response = _service.getByName(name);
+
+        } else response.addError("El usuario no es administrador");
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 
