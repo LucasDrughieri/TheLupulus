@@ -11,6 +11,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.hibernate.c3p0.internal.C3P0ConnectionProvider;
 
 @Configuration
 @EnableTransactionManagement
@@ -59,6 +60,20 @@ public class DatabaseConfig {
         hibernateProperties.put("hibernate.dialect", HIBERNATE_DIALECT);
         hibernateProperties.put("hibernate.show_sql", HIBERNATE_SHOW_SQL);
         hibernateProperties.put("hibernate.hbm2ddl.auto", HIBERNATE_HBM2DDL_AUTO);
+
+        hibernateProperties.put("hibernate.connection.driver_class", DB_DRIVER);
+        hibernateProperties.put("hibernate.connection.url", DB_URL);
+        hibernateProperties.put("hibernate.connection.username", DB_USERNAME);
+        hibernateProperties.put("hibernate.connection.password", DB_PASSWORD);
+        hibernateProperties.put("hibernate.connection.provider_class", "org.hibernate.c3p0.internal.C3P0ConnectionProvider");
+
+        hibernateProperties.put("hibernate.c3p0.acquire_increment", 1);
+        hibernateProperties.put("hibernate.c3p0.idle_test_period", 120);
+        hibernateProperties.put("hibernate.c3p0.max_size", 15);
+        hibernateProperties.put("hibernate.c3p0.max_statements", 0);
+        hibernateProperties.put("hibernate.c3p0.min_size", 1);
+        hibernateProperties.put("hibernate.c3p0.timeout", 120);
+
         sessionFactoryBean.setHibernateProperties(hibernateProperties);
 
         return sessionFactoryBean;
