@@ -170,7 +170,7 @@ public class OrderService {
                 }
 
                 orderModel.setItems(order.getItems());
-                orderModel.setUsuario(user);
+                orderModel.setUsuario(order.getUser());
                 orderModel.setIdPedido(order.getId());
                 orderModel.setTotal(total);
                 orderModel.setPagado(order.getPagado());
