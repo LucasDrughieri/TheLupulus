@@ -112,13 +112,7 @@ public class BeerController {
 
         Response response = new Response();
 
-        UserSession session = _userSessionRepository.getByToken(sessionToken);
-        User user = session.getUserId();
-
-        if (user != null && user.getRole().equals(UserRole.ADMINISTRATOR.getCode())) {
-            response =_service.getAll();
-
-        } else response.addError("El usuario no es administrador");
+        response =_service.getAll();
 
         if(response.hasErrors()) return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 

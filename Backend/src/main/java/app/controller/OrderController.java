@@ -2,6 +2,7 @@ package app.controller;
 
 import app.entity.UserSession;
 import app.entity.user.User;
+import app.entity.user.UserRole;
 import app.infraestructure.Response;
 import app.model.order.Item;
 import app.model.order.ItemList;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/api")
@@ -38,6 +40,9 @@ public class OrderController {
     @PostMapping("/pedido")
     @ResponseBody
     public ResponseEntity<Response> post(@RequestBody ItemList items, @RequestHeader(value = "Authorization") String sessionToken) {
+        if (!UserSession.validateAccess(_userSessionRepository, sessionToken, new Integer[] { UserRole.NORMAL_USER.getCode() } )) {
+            return UserSession.errorResponse();
+        }
 
         // Get user logged in
         UserSession session = _userSessionRepository.getByToken(sessionToken);
@@ -54,6 +59,9 @@ public class OrderController {
     @GetMapping("/pedido")
     @ResponseBody
     public ResponseEntity<Response> getall(@RequestHeader(value = "Authorization") String sessionToken) {
+        if (!UserSession.validateAccess(_userSessionRepository, sessionToken, new Integer[] { UserRole.ADMINISTRATOR.getCode(), UserRole.NORMAL_USER.getCode() } )) {
+            return UserSession.errorResponse();
+        }
 
         // Get user logged in
         UserSession session = _userSessionRepository.getByToken(sessionToken);
@@ -70,6 +78,9 @@ public class OrderController {
     @GetMapping("/pedido/{pedidoId}")
     @ResponseBody
     public ResponseEntity<Response> get(@PathVariable("pedidoId") Long pedidoId, @RequestHeader(value = "Authorization") String sessionToken) {
+        if (!UserSession.validateAccess(_userSessionRepository, sessionToken, new Integer[] { UserRole.ADMINISTRATOR.getCode(), UserRole.NORMAL_USER.getCode() } )) {
+            return UserSession.errorResponse();
+        }
 
         // Get user logged in
         UserSession session = _userSessionRepository.getByToken(sessionToken);
@@ -86,6 +97,9 @@ public class OrderController {
     @PatchMapping("/pedido/{pedidoId}")
     @ResponseBody
     public ResponseEntity<Response> patch(@RequestBody Order order, @PathVariable("pedidoId") Long pedidoId, @RequestHeader(value = "Authorization") String sessionToken) {
+        if (!UserSession.validateAccess(_userSessionRepository, sessionToken, new Integer[] { UserRole.ADMINISTRATOR.getCode() } )) {
+            return UserSession.errorResponse();
+        }
 
         // Get user logged in
         UserSession session = _userSessionRepository.getByToken(sessionToken);
