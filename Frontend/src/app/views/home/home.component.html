@@ -1,11 +1,11 @@
 <div class="wrapper-content animated fadeInRight">
 
     <div class="text-center text-underline">
-        <h2>Acciones de Administrador</h2>
+        <h2>Menú Principal</h2>
     </div>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4" *ngIf="roleId == 1">
             <div class="widget navy-bg pointer" (click)="navigate('/Clientes')">
                 <div class="row">
                     <div class="col-xs-4">
@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" *ngIf="roleId == 1">
             <div class="widget navy-bg pointer" (click)="navigate('/Stock')">
                 <div class="row">
                     <div class="col-xs-4">
@@ -43,7 +43,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" *ngIf="roleId == 1">
         <div class="col-md-4">
             <div class="widget navy-bg pointer" (click)="navigate('/Usuarios')">
                 <div class="row">

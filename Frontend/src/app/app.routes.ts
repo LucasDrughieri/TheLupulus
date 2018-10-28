@@ -43,7 +43,7 @@ export const ROUTES: Routes = [
     {
         path: '', component: BasicLayoutComponent,
         children: [
-            { path: 'Home', component: HomeComponent, canActivate: [AuthGuard], data: { roleId: [1] } },
+            { path: 'Home', component: HomeComponent, canActivate: [AuthGuard], data: { roleId: [1,2] } },
         ]
     },
 
