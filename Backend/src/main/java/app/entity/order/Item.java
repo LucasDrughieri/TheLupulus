@@ -32,7 +32,7 @@ public class Item {
     private Long cantidad;
 
     public Float getPrecio() {
-        return beer.getPricePerLitre() * container.getQuantity() * cantidad;
+        return beer.getPricePerLitre() * container.getCapacity() * cantidad;
     }
 
 }
