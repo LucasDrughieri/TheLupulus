@@ -18,7 +18,7 @@ public class BeerModel {
 
     private float pricePerLitre;
 
-    private Integer quantity;
+    private float quantity;
 
     private Boolean visible;
 
@@ -86,11 +86,11 @@ public class BeerModel {
         this.pricePerLitre = pricePerLitre;
     }
 
-    public Integer getQuantity() {
+    public float getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(float quantity) {
         this.quantity = quantity;
     }
 

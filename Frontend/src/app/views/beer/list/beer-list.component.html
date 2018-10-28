@@ -20,6 +20,7 @@
                         <th class='text-center'>Color</th>
                         <th class='text-center'>IBU</th>
                         <th class='text-center'>% Alc</th>
+                        <th class='text-center'>Stock (lt.)</th>
                         <th class='text-center'>Activo</th>
                         <th class='text-center'>Acciones</th>
                     </tr>
@@ -30,7 +31,8 @@
                         <td class='text-center'>{{ beer.granos }}</td>
                         <td class='text-center'>{{ beer.color }}</td>
                         <td class='text-center'>{{ beer.ibu }}</td>
-                        <td class='text-center'>{{ beer.graduation }}</td>
+                        <td class='text-center'>{{ beer.graduation | number: '1.0-2' }} %</td>
+                        <td class='text-center'>{{ beer.quantity | number: '1.0-2' }} lt.</td>
                         <td class='text-center'>
                             <label *ngIf="beer.visible" class="label label-info">Si</label>
                             <label *ngIf="!beer.visible" class="label label-danger">No</label>

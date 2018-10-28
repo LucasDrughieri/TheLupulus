@@ -34,12 +34,12 @@
                             <td class='text-center'>$ {{ item.precio | number: '1.2-2' }}</td>
                         </tr>
                     </tbody>
-                    <!-- tfoot>
+                    <tfoot>
                         <tr>
                             <td colspan="3" class='text-right'><strong>Total:</strong></td>
-                            <td class='text-center'>{{ getTotal() | number: '1.2-2' }}</th>
+                            <td class='text-center'>$ {{ order.total  | number: '1.2-2' }}</td>
                         </tr>
-                    </tfoot -->
+                    </tfoot>
                 </table>
             </div>
         </div>

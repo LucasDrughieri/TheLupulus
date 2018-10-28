@@ -18,7 +18,7 @@
                         <th class='text-center'>Nombre</th>
                         <th class='text-center'>Material</th>
                         <th class='text-center'>Capacidad</th>
-                        <th class='text-center'>Cantidad</th>
+                        <th class='text-center'>Stock (un.)</th>
                         <th class='text-center'>Activo</th>
                         <th class='text-center'>Acciones</th>
                     </tr>
@@ -27,8 +27,8 @@
                     <tr *ngFor="let container of containers" class="pointer">
                         <td class='text-center'>{{ container.name }}</td>
                         <td class='text-center'>{{ container.material }}</td>
-                        <td class='text-center'>{{ container.capacity }}</td>
-                        <td class='text-center'>{{ container.quantity }}</td>
+                        <td class='text-center'>{{ container.capacity | number: '1.0-2' }} lt</td>
+                        <td class='text-center'>{{ container.quantity | number: '1.0' }} un.</td>
                         <td class='text-center'>
                             <label *ngIf="container.visible" class="label label-info">Si</label>
                             <label *ngIf="!container.visible" class="label label-danger">No</label>

@@ -27,7 +27,7 @@ public class Beer {
     @Column(name = "price_per_litre")
     private float pricePerLitre;
 
-    private Integer quantity;
+    private float quantity;
 
     private Boolean visible;
 
@@ -95,11 +95,11 @@ public class Beer {
         this.pricePerLitre = pricePerLitre;
     }
 
-    public Integer getQuantity() {
+    public float getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(float quantity) {
         this.quantity = quantity;
     }
 
@@ -111,7 +111,7 @@ public class Beer {
         this.visible = visible;
     }
 
-    public void addStock(Integer quantityToAdd) {
+    public void addStock(float quantityToAdd) {
         quantity = quantity + quantityToAdd;
     }
 }
