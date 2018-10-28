@@ -20,8 +20,8 @@ public class InitialConfiguration {
 
     @EventListener
     public void seedAll(ContextRefreshedEvent event){
-        seedClients();
-        seedUsers();
+        // seedClients();
+        // seedUsers();
     }
 
     private void seedClients(){
